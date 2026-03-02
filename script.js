@@ -137,14 +137,14 @@ function goQ(idx){
 qTimer=setInterval(function(){goQ((curQ+1)%4);},4500);
 
 /* EMAILJS */
-(function(){emailjs.init('YOUR_PUBLIC_KEY');})();
+(function(){emailjs.init('s3MjBuj6pPA4JZfhq');})();
 document.addEventListener('DOMContentLoaded',function(){
   document.getElementById('composeForm').addEventListener('submit',function(e){
     e.preventDefault();
     var btn=this.querySelector('.compose-send');
     var st=document.getElementById('composeStatus');
     btn.disabled=true;btn.textContent='Sending...';st.className='compose-status';
-    emailjs.send('service_qamg8rg','template_77w8o5v',{
+    emailjs.send('service_qamg8rg','template_fr4kits',{
       from_name:document.getElementById('c_name').value,
       from_email:document.getElementById('c_email').value,
       subject:document.getElementById('c_subject').value,
