@@ -1,67 +1,84 @@
-# Sreya Kambhatla — Data & Business Analyst Portfolio
+# ✨ Sreya Kambhatla — Data & Business Analyst Portfolio
 
-<div align="center">
+[![Live Site](https://img.shields.io/badge/🌐_Live_Site-Visit_Portfolio-00d4ff?style=for-the-badge&labelColor=060b14)](https://sreya-kambhatla.github.io/Portfolio_v04/)
+[![HTML](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](#)
+[![CSS](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](#)
+[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](#)
+[![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](#)
+[![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)](#)
 
-[![Live Site](https://img.shields.io/badge/Live%20Site-sreya--kambhatla.github.io-00d4ff?style=for-the-badge&logo=github-pages&logoColor=white)](https://sreya-kambhatla.github.io/Portfolio_v04/)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-sreya--kambhatla-0a66c2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/sreya-kambhatla/)
-[![GitHub](https://img.shields.io/badge/GitHub-sreya--kambhatla-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/sreya-kambhatla)
-
-![HTML](https://img.shields.io/badge/HTML-E34F26?style=flat-square&logo=html5&logoColor=white)
-![CSS](https://img.shields.io/badge/CSS-1572B6?style=flat-square&logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
-![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
-![YAML](https://img.shields.io/badge/YAML-CB171E?style=flat-square&logo=yaml&logoColor=white)
-![Shell](https://img.shields.io/badge/Shell-4EAA25?style=flat-square&logo=gnubash&logoColor=white)
-
-[![CI](https://github.com/sreya-kambhatla/Portfolio_v04/actions/workflows/deploy.yml/badge.svg)](https://github.com/sreya-kambhatla/Portfolio_v04/actions/workflows/deploy.yml)
-
-</div>
+A dark glassmorphism portfolio built from scratch with vanilla HTML, CSS, and JavaScript — no frameworks, no build step. Features animated particle backgrounds, scroll-triggered reveals, and a fully responsive layout.
 
 ---
 
-## Preview
+## 🖼️ Preview
 
-> **[→ View Live Site](https://sreya-kambhatla.github.io/Portfolio_v04/)**
+> Visit the [live site](https://sreya-kambhatla.github.io/Portfolio_v04/) to see it in action
 
-![OG Preview](og-image.png)
-
----
-
-## About
-
-Personal portfolio for **Sreya Kambhatla**, Data & Business Analyst with 2+ years of experience across logistics, media operations, and university research. Built from scratch — no frameworks, no build step, no dependencies beyond a single CDN script.
+[![Portfolio Preview](https://img.shields.io/badge/%E2%96%B6_View_Live-sreya--kambhatla.github.io%2FPortfolio__v04-00d4ff?style=flat-square&labelColor=060b14)](https://sreya-kambhatla.github.io/Portfolio_v04/)
 
 ---
 
-## Features
+## ✨ Features
 
-### Visuals & Animations
-- **Animated particle canvas** — 70-node network with cyan/purple nebula glow, runs full-page behind all content
-- **Scroll-triggered reveal** — elements animate in as they enter the viewport (works on GitHub Pages, `file://`, and iframes)
-- **Spinning gradient profile ring** — conic gradient animation on the hero photo
-- **Shimmer wave timeline** — soft light sweep travels left-to-right across the experience timeline on loop
-
-### Sections
-- **Hero** — name, role, bio, social links, resume download, 3 key stats
-- **Education Timeline** — vertical center-spine with alternating left/right cards, 4-color gradient spine, left/right slide-in animations
-- **Work Experience** — horizontal 4-job timeline with per-company color coding (cyan/purple/amber/green), hover-expand detail panels
-- **Manager Quotes** — auto-rotating quotes with per-company color matching, manual dot navigation
-- **Tech Stack** — 5-panel asymmetric grid (Programming · DS & ML · Frameworks · Cloud · Visualization), subtle tinted glass chips
-- **Contact** — Outlook-style compose panel powered by EmailJS, social/calendar links
-
-### Engineering
-- **CI/CD** via GitHub Actions — validates HTML structure, smoke-tests CSS/JS, regenerates OG image on every push
-- **Open Graph image** — auto-generated via Python/Pillow; appears as preview card when link is shared on LinkedIn, Twitter, Slack
-- **Favicon** — inline SVG data URI
-- **Responsive** — mobile-friendly layout at 900px and 560px breakpoints
+- 🎨 **Dark glassmorphism design** — frosted glass tiles on a deep navy canvas
+- 🌌 **Animated particle background** — 70-node network with cyan/purple nebula glow
+- 🎬 **Scroll-triggered reveal animations** — elements slide in as you scroll
+- 📚 **Vertical education timeline** — alternating left/right cards with 4-color spine gradient
+- 💼 **Horizontal experience timeline** — shimmer wave animation, hover-to-expand job details
+- 💬 **Rotating manager quotes** — auto-cycling with per-company color coding
+- 🛠️ **5-panel tech stack grid** — asymmetric layout with subtle category tints
+- 📬 **Outlook-style contact form** — powered by EmailJS, no backend needed
+- 🖼️ **OG social preview image** — auto-generated with Python + Pillow for link sharing
+- 🤖 **CI/CD pipeline** — GitHub Actions validates HTML, CSS & JS on every push
+- 📱 **Fully responsive** — mobile, tablet, and desktop
+- 🔖 **Custom SK favicon** — cyan monogram in browser tab
 
 ---
 
-## Contact
+## 📁 Folder Structure
 
-| | |
+```
+Portfolio_v04/
+├── index.html                  # Page structure & content
+├── styles.css                  # All styling, animations, responsive layout
+├── script.js                   # Canvas, scroll reveal, quotes, contact form
+├── generate_og_image.py        # Python: generates social preview card (1200x630)
+├── og-image.png                # Generated OG image — committed to repo
+├── serve.sh                    # Shell: spin up local dev server instantly
+├── README.md
+└── .github/
+    └── workflows/
+        └── deploy.yml          # GitHub Actions: validates on every push
+```
+
+---
+
+## 🖼️ Regenerate Social Preview
+
+```bash
+pip install Pillow
+python generate_og_image.py
+# Outputs og-image.png at 1200x630px
+```
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technologies |
 |---|---|
-| **Email** | sreyakambhatla@outlook.com |
-| **LinkedIn** | [linkedin.com/in/sreya-kambhatla](https://www.linkedin.com/in/sreya-kambhatla/) |
-| **GitHub** | [github.com/sreya-kambhatla](https://github.com/sreya-kambhatla) |
-| **Book a call** | [calendly.com/sreyakambhatla/30min](https://calendly.com/sreyakambhatla/30min) |
+| **Languages** | HTML5 · CSS3 · JavaScript · Python · Shell |
+| **Data & ML** | Scikit-learn · PyTorch · Pandas · NumPy · SQL |
+| **Visualization** | Power BI · Tableau · Plotly · Matplotlib |
+| **Cloud** | AWS · Azure · Google Cloud · Databricks |
+| **Tools** | Jira · Docker · EmailJS · GitHub Actions |
+
+---
+
+## 📬 Contact
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/sreya-kambhatla/)
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/sreya-kambhatla)
+[![Calendly](https://img.shields.io/badge/Book_a_Call-4D94FF?style=for-the-badge&logo=googlecalendar&logoColor=white)](https://calendly.com/sreyakambhatla/30min)
+[![Email](https://img.shields.io/badge/Email-00d4ff?style=for-the-badge&logo=microsoftoutlook&logoColor=white)](mailto:sreyakambhatla@outlook.com)
