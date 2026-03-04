@@ -57,11 +57,7 @@ jobs:
           test -f script.js    && echo "✓ script.js"    || (echo "✗ script.js missing"    && exit 1)
           test -f README.md    && echo "✓ README.md"    || (echo "✗ README.md missing"    && exit 1)
 
-      # Step 5: Regenerate OG image so it's always fresh
-      - name: Generate OG social preview image
-        run: python generate_og_image.py
-
-      # Step 6: Validate HTML using Python's built-in html.parser
+      # Step 5: Validate HTML using Python's built-in html.parser
       # A simple structural check — catches unclosed tags and malformed markup
       - name: Validate HTML structure
         run: |
@@ -106,7 +102,7 @@ jobs:
               print(f"  HTML structure valid. Parsed successfully.")
           PYEOF
 
-      # Step 7: Check CSS has key selectors (smoke test)
+      # Step 6: Check CSS has key selectors (smoke test)
       - name: Smoke-test CSS
         run: |
           python - << 'PYEOF'
@@ -121,7 +117,7 @@ jobs:
           print(f"CSS smoke test passed. {len(css):,} chars, all key selectors present.")
           PYEOF
 
-      # Step 8: Check JS has key functions (smoke test)
+      # Step 7: Check JS has key functions (smoke test)
       - name: Smoke-test JavaScript
         run: |
           python - << 'PYEOF'
