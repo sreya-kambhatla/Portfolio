@@ -45,7 +45,7 @@
   function getDelay(el) {
     var siblings = el.parentElement.querySelectorAll(S);
     for (var i = 0; i < siblings.length; i++) {
-      if (siblings[i] === el) return i * 120;
+      if (siblings[i] === el) return i * 180;
     }
     return 0;
   }
