@@ -38,60 +38,44 @@
   W=cv.width=window.innerWidth;H=cv.height=window.innerHeight;init();requestAnimationFrame(draw);
 })();
 
-/* SCROLL REVEAL — replays on every scroll up and down */
+/* SCROLL REVEAL — replays every scroll up and down */
 (function(){
-  var S = '.reveal,.reveal-left,.reveal-right';
-
-  function getDelay(el) {
-    var siblings = el.parentElement.querySelectorAll(S);
-    for (var i = 0; i < siblings.length; i++) {
-      if (siblings[i] === el) return i * 200;
-    }
+  var S='.reveal,.reveal-left,.reveal-right';
+  function getDelay(el){
+    var siblings=el.parentElement.querySelectorAll(S);
+    for(var i=0;i<siblings.length;i++) if(siblings[i]===el) return i * 200;
     return 0;
   }
-
-  window.addEventListener('load', function() {
-
-    if ('IntersectionObserver' in window) {
-      var io = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          if (entry.isIntersecting) {
-            // Element entered viewport — stagger delay then animate in
-            entry.target.style.transitionDelay = getDelay(entry.target) + 'ms';
+  window.addEventListener('load',function(){
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){
+            entry.target.style.transitionDelay=getDelay(entry.target)+'ms';
             entry.target.classList.add('visible');
           } else {
-            // Element left viewport — reset instantly so it's ready to replay
-            entry.target.style.transitionDelay = '0ms';
+            entry.target.style.transitionDelay='0ms';
             entry.target.classList.remove('visible');
           }
         });
-      }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -40px 0px'
-      });
-
-      document.querySelectorAll(S).forEach(function(el) {
-        io.observe(el); // no unobserve — keeps watching forever
-      });
+      },{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+      document.querySelectorAll(S).forEach(function(el){io.observe(el);});
     }
-
-    // Scroll fallback for older browsers
-    function scan() {
-      var els = document.querySelectorAll(S);
-      var vh  = window.innerHeight;
-      for (var i = 0; i < els.length; i++) {
-        var r = els[i].getBoundingClientRect();
-        if (r.top < vh * 0.9 && r.bottom > 0) {
-          els[i].style.transitionDelay = getDelay(els[i]) + 'ms';
+    function scan(){
+      var els=document.querySelectorAll(S),vh=window.innerHeight;
+      for(var i=0;i<els.length;i++){
+        var r=els[i].getBoundingClientRect();
+        if(r.top<vh*.9&&r.bottom>0){
+          els[i].style.transitionDelay=getDelay(els[i])+'ms';
           els[i].classList.add('visible');
         } else {
-          els[i].style.transitionDelay = '0ms';
+          els[i].style.transitionDelay='0ms';
           els[i].classList.remove('visible');
         }
       }
     }
-    window.addEventListener('scroll', scan, {passive: true});
-    scan(); // initial check on load
+    window.addEventListener('scroll',scan,{passive:true});
+    scan();
   });
 })();
 
@@ -131,14 +115,14 @@ function goQ(idx){
 qTimer=setInterval(function(){goQ((curQ+1)%4);},4500);
 
 /* EMAILJS */
-(function(){emailjs.init('s3MjBuj6pPA4JZfhq');})();
+(function(){emailjs.init('YOUR_PUBLIC_KEY');})();
 document.addEventListener('DOMContentLoaded',function(){
   document.getElementById('composeForm').addEventListener('submit',function(e){
     e.preventDefault();
     var btn=this.querySelector('.compose-send');
     var st=document.getElementById('composeStatus');
     btn.disabled=true;btn.textContent='Sending...';st.className='compose-status';
-    emailjs.send('service_qamg8rg','template_fr4kits',{
+    emailjs.send('service_qamg8rg','template_77w8o5v',{
       from_name:document.getElementById('c_name').value,
       from_email:document.getElementById('c_email').value,
       subject:document.getElementById('c_subject').value,
@@ -155,3 +139,64 @@ document.addEventListener('DOMContentLoaded',function(){
     });
   });
 });
+/* THEME TOGGLE */
+(function(){
+  var btn   = document.getElementById('themeToggle');
+  var moon  = document.getElementById('iconMoon');
+  var sun   = document.getElementById('iconSun');
+  var body  = document.body;
+
+  function setTheme(mode){
+    if(mode === 'light'){
+      body.classList.add('light');
+      moon.style.display = 'none';
+      sun.style.display  = 'block';
+    } else {
+      body.classList.remove('light');
+      moon.style.display = 'block';
+      sun.style.display  = 'none';
+    }
+    // Persist preference so it survives page refresh
+    try { localStorage.setItem('theme', mode); } catch(e){}
+  }
+
+  // Restore saved preference on load
+  var saved = '';
+  try { saved = localStorage.getItem('theme') || ''; } catch(e){}
+  // Also respect OS-level dark/light preference if no saved setting
+  if(!saved && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches){
+    saved = 'light';
+  }
+  if(saved) setTheme(saved);
+
+  // Toggle on click
+  btn.addEventListener('click', function(){
+    setTheme(body.classList.contains('light') ? 'dark' : 'light');
+  });
+})();
+
+/* THEME TOGGLE */
+(function(){
+  var btn  = document.getElementById('themeToggle');
+  var moon = document.getElementById('iconMoon');
+  var sun  = document.getElementById('iconSun');
+  function setTheme(mode){
+    if(mode==='light'){
+      document.body.classList.add('light');
+      moon.style.display='none';
+      sun.style.display='block';
+    } else {
+      document.body.classList.remove('light');
+      moon.style.display='block';
+      sun.style.display='none';
+    }
+    try{localStorage.setItem('theme',mode);}catch(e){}
+  }
+  var saved='';
+  try{saved=localStorage.getItem('theme')||'';}catch(e){}
+  if(!saved&&window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches) saved='light';
+  if(saved) setTheme(saved);
+  btn.addEventListener('click',function(){
+    setTheme(document.body.classList.contains('light')?'dark':'light');
+  });
+})();
