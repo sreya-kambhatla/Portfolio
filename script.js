@@ -131,7 +131,7 @@ function goQ(idx){
 qTimer=setInterval(function(){goQ((curQ+1)%4);},4500);
 
 /* EMAILJS */
-(function(){emailjs.init('service_qamg8rg');})();
+(function(){emailjs.init('s3MjBuj6pPA4JZfhq');})();
 document.addEventListener('DOMContentLoaded',function(){
   document.getElementById('composeForm').addEventListener('submit',function(e){
     e.preventDefault();
