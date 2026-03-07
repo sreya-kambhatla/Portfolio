@@ -23,29 +23,24 @@ A dark glassmorphism portfolio built from scratch with vanilla HTML, CSS, and Ja
 ### 🎨 Design & Theming
 - 🌙 **Dark glassmorphism design** — frosted glass tiles on a deep navy canvas
 - ☀️ **Light mode toggle** — warm greige palette with indigo accents, switchable via an animated orb button
-- 🟠 **Amber sun / cyan moon toggle** — orb shifts from cyan (dark) to amber (light) to reflect the active theme
 - 🌌 **Animated particle background** — 70-node network with cyan/purple nebula glow, visible in both modes
 
 ### 🧩 Sections & Components
-- 📊 **Stats row** — 2+ Years Experience, 50%+ Reporting Time Saved, 96% Client Satisfaction — indigo in light mode, cyan in dark
 - 🎬 **Scroll-triggered reveal animations** — elements slide in as you scroll
-- 📚 **Vertical education timeline** — alternating left/right cards with 4-color spine gradient
 - 💼 **Horizontal experience timeline** — shimmer wave animation, hover-to-expand job details
-- 💬 **Rotating manager quotes** — auto-cycling with per-company color coding
 - 🛠️ **5-panel tech stack grid** — asymmetric layout with subtle category tints
 
 ### ⚙️ Technical
 - 🖼️ **OG social preview image** — auto-generated with Python + Pillow for link sharing
 - 🤖 **CI/CD pipeline** — GitHub Actions validates HTML, CSS & JS on every push
 - 📱 **Fully responsive** — mobile, tablet, and desktop
-- 🔖 **Custom SK favicon** — cyan monogram in browser tab
 
 ---
 
 ## 📁 Folder Structure
 
 ```
-Portfolio-Toggle-Mode-v03/
+Portfolio/
 ├── index.html                  # Page structure & content
 ├── styles.css                  # All styling, animations, light/dark themes, responsive layout
 ├── script.js                   # Canvas, scroll reveal, quotes, contact form
