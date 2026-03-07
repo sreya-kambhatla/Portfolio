@@ -45,7 +45,7 @@ Portfolio/
 ├── styles.css                  # All styling, animations, light/dark themes, responsive layout
 ├── script.js                   # Canvas, scroll reveal, quotes, contact form
 ├── serve.sh                    # Shell: spin up local dev server instantly
-├── profile.webp                # Profile photo
+├── Portfolio Picture.png       # Profile photo
 ├── README.md
 └── .github/
     └── workflows/
