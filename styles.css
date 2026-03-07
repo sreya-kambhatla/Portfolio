@@ -34,6 +34,9 @@
 /* 70% of dark mode visibility — was 0.18, now 0.55 */
 [data-theme="light"] #bgCanvas{opacity:0.55;}
 [data-theme="light"] .profile-ring::after{background:var(--bg);}
+[data-theme="light"] .profile-ring::before{
+  background:conic-gradient(#007a99,var(--purple),var(--amber),var(--green),#007a99);
+}
 [data-theme="light"] .hero-name{
   background:linear-gradient(135deg,var(--text) 40%,var(--cyan) 100%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
@@ -69,39 +72,86 @@
 [data-theme="light"] ::-webkit-scrollbar-track{background:var(--bg2);}
 [data-theme="light"] ::-webkit-scrollbar-thumb{background:var(--cyan2);}
 
-/* Education — Option 2: dark teal for field text + accent line in light mode */
-[data-theme="light"] .edu-item.left .edu-field,
-[data-theme="light"] .edu-item.right .edu-field{
-  color:#0f7060;
-}
+/* ── EDUCATION light mode ─────────────────────────────────────
+   Bachelor (left)  → dark cyan #007a99
+   Master   (right) → purple   (own colour, unchanged)
+──────────────────────────────────────────────────────────── */
+[data-theme="light"] .edu-item.left .edu-field{color:#007a99;}
+[data-theme="light"] .edu-item.right .edu-field{color:#5c3db8;}
+
 [data-theme="light"] .edu-item.left .edu-tile .edu-accent{
-  background:linear-gradient(90deg,rgba(15,112,96,.65),transparent);
+  background:linear-gradient(90deg,rgba(0,122,153,.65),transparent);
 }
 [data-theme="light"] .edu-item.right .edu-tile .edu-accent{
-  background:linear-gradient(90deg,rgba(15,112,96,.65),transparent);
+  background:linear-gradient(90deg,rgba(92,61,184,.65),transparent);
 }
 
-/* Education tags — teal to match field color */
-[data-theme="light"] .edu-item.left .edu-tile .edu-tag,
+/* Education tags — left=dark cyan, right=purple */
+[data-theme="light"] .edu-item.left .edu-tile .edu-tag{
+  background:rgba(0,122,153,.09);border-color:rgba(0,122,153,.32);color:rgba(0,85,107,.95);
+}
 [data-theme="light"] .edu-item.right .edu-tile .edu-tag{
-  background:rgba(15,112,96,.09);border-color:rgba(15,112,96,.32);color:rgba(8,80,68,.95);
+  background:rgba(92,61,184,.10);border-color:rgba(92,61,184,.35);color:rgba(70,40,160,.95);
 }
 
-/* Tech stack chips — all panels use teal to match edu tiles */
+/* ── TECH STACK chips — per-category colours restored ───── */
 [data-theme="light"] .sp-lang .chip{
-  background:rgba(15,112,96,.09);border-color:rgba(15,112,96,.32);color:rgba(8,80,68,.95);
+  background:rgba(59,64,196,.12);border-color:rgba(59,64,196,.40);color:rgba(35,40,160,.95);
 }
 [data-theme="light"] .sp-dsml .chip{
-  background:rgba(15,112,96,.09);border-color:rgba(15,112,96,.32);color:rgba(8,80,68,.95);
+  background:rgba(92,61,184,.12);border-color:rgba(92,61,184,.40);color:rgba(70,40,160,.95);
 }
 [data-theme="light"] .sp-tools .chip{
-  background:rgba(15,112,96,.09);border-color:rgba(15,112,96,.32);color:rgba(8,80,68,.95);
+  background:rgba(20,130,120,.12);border-color:rgba(20,130,120,.40);color:rgba(10,90,80,.95);
 }
 [data-theme="light"] .sp-cloud .chip{
-  background:rgba(15,112,96,.09);border-color:rgba(15,112,96,.32);color:rgba(8,80,68,.95);
+  background:rgba(184,110,0,.12);border-color:rgba(184,110,0,.40);color:rgba(140,75,0,.95);
 }
 [data-theme="light"] .sp-viz .chip{
-  background:rgba(15,112,96,.09);border-color:rgba(15,112,96,.32);color:rgba(8,80,68,.95);
+  background:rgba(192,48,96,.12);border-color:rgba(192,48,96,.40);color:rgba(150,30,70,.95);
+}
+
+/* ── EXPERIENCE — Comcast card (1st) → dark cyan ────────── */
+[data-theme="light"] .job-wrap:nth-child(1) .job-year{color:#007a99;}
+[data-theme="light"] .job-wrap:nth-child(1) .job-accent-bar{
+  background:linear-gradient(90deg,#007a99,transparent);
+}
+[data-theme="light"] .job-wrap:nth-child(1):hover .job-card{
+  border-color:rgba(0,122,153,.38);box-shadow:0 0 22px rgba(0,122,153,.12);
+}
+[data-theme="light"] .job-wrap:nth-child(1):hover .job-dot{
+  border-color:#007a99;box-shadow:0 0 10px rgba(0,122,153,.5);
+}
+[data-theme="light"] .job-wrap:nth-child(1) .detail-list li::before{color:#007a99;}
+[data-theme="light"] .job-wrap:nth-child(1) .detail-list li strong{color:#007a99;}
+[data-theme="light"] .job-wrap:nth-child(1) .dtag{
+  background:rgba(0,122,153,.08);border-color:rgba(0,122,153,.22);color:#007a99;
+}
+
+/* ── EXPERIENCE timeline — starts dark cyan, light mode only */
+[data-theme="light"] .timeline-track::before{
+  background:linear-gradient(to right,#007a99,var(--purple),var(--amber),var(--green));
+}
+
+/* ── MANAGER QUOTES — per-company colours in light mode ─── */
+[data-theme="light"] .q-slide:nth-child(1) .q-co{color:#007a99;}
+[data-theme="light"] .q-slide:nth-child(2) .q-co{color:#5c3db8;}
+[data-theme="light"] .q-slide:nth-child(3) .q-co{color:#b86e00;}
+[data-theme="light"] .q-slide:nth-child(4) .q-co{color:#1a7a50;}
+[data-theme="light"] .q-slide:nth-child(1) .q-attr{color:#007a99;}
+[data-theme="light"] .q-slide:nth-child(2) .q-attr{color:#5c3db8;}
+[data-theme="light"] .q-slide:nth-child(3) .q-attr{color:#b86e00;}
+[data-theme="light"] .q-slide:nth-child(4) .q-attr{color:#1a7a50;}
+[data-theme="light"] .q-dot.on{background:#007a99;}
+[data-theme="light"] .q-dot{background:rgba(0,0,0,.15);}
+[data-theme="light"] .quotes-card-bar{
+  background:linear-gradient(90deg,#007a99,#5c3db8,transparent);
+}
+[data-theme="light"] .quotes-card::before{color:rgba(0,122,153,.07);}
+[data-theme="light"] .quotes-card{
+  background:rgba(245,243,238,0.88);
+  border-color:rgba(100,90,70,.18);
+  box-shadow:0 8px 40px rgba(60,50,30,.10);
 }
 
 /* Stack panel title divider */
@@ -218,7 +268,7 @@ section{position:relative;z-index:2;padding:110px 48px 80px;}
 .hero-inner{display:flex;align-items:center;gap:56px;width:100%;}
 .profile-ring{position:relative;width:240px;height:240px;flex-shrink:0;}
 .profile-ring::before{content:"";position:absolute;inset:-5px;border-radius:50%;
-  background:conic-gradient(var(--cyan),var(--purple),var(--amber),var(--cyan));
+  background:conic-gradient(var(--cyan),var(--purple),var(--amber),var(--green),var(--cyan));
   animation:spin 6s linear infinite;z-index:0;}
 .profile-ring::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--bg);z-index:1;}
 @keyframes spin{to{transform:rotate(360deg);}}
@@ -445,33 +495,7 @@ section{position:relative;z-index:2;padding:110px 48px 80px;}
   border:none;cursor:pointer;padding:0;transition:background .3s,transform .3s;}
 .q-dot.on{background:var(--cyan);transform:scale(1.5);}
 
-/* Light mode card overrides */
-[data-theme="light"] .quotes-card{
-  background:rgba(245,243,238,0.88);
-  border-color:rgba(100,90,70,.18);
-  box-shadow:0 8px 40px rgba(60,50,30,.10);
-}
-[data-theme="light"] .quotes-card::before{
-  color:rgba(15,112,96,.07);
-}
-[data-theme="light"] .quotes-card-bar{
-  background:linear-gradient(90deg,#0f7060,rgba(15,112,96,.2),transparent);
-}
-[data-theme="light"] .q-text{color:rgba(30,28,24,.82);}
-[data-theme="light"] .q-attr{
-  border-top-color:rgba(0,0,0,.08);
-  color:var(--muted);
-}
-[data-theme="light"] .q-slide:nth-child(1) .q-co,
-[data-theme="light"] .q-slide:nth-child(2) .q-co,
-[data-theme="light"] .q-slide:nth-child(3) .q-co,
-[data-theme="light"] .q-slide:nth-child(4) .q-co{color:#0f7060;}
-[data-theme="light"] .q-slide:nth-child(1) .q-attr,
-[data-theme="light"] .q-slide:nth-child(2) .q-attr,
-[data-theme="light"] .q-slide:nth-child(3) .q-attr,
-[data-theme="light"] .q-slide:nth-child(4) .q-attr{color:#0f7060;}
-[data-theme="light"] .q-dot{background:rgba(0,0,0,.15);}
-[data-theme="light"] .q-dot.on{background:#0f7060;}
+/* Light mode quotes overrides consolidated above */
 
 /* ══ TECH STACK — 5-panel matching reference ══ */
 .stack-outer{display:grid;
