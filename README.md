@@ -34,11 +34,6 @@ A dark glassmorphism portfolio built from scratch with vanilla HTML, CSS, and Ja
 - 💬 **Rotating manager quotes** — auto-cycling with per-company color coding
 - 🛠️ **5-panel tech stack grid** — asymmetric layout with subtle category tints
 
-### 📬 Contact
-- **Outlook-style compose form** — Name, From, Subject, and message fields powered by EmailJS — no backend needed
-- **Email chip** — displays recipient address styled with purple (light mode) or cyan (dark mode) palette chip
-- **Social email icon** — links directly to `mailto:sreyakambhatla@outlook.com`
-
 ### ⚙️ Technical
 - 🖼️ **OG social preview image** — auto-generated with Python + Pillow for link sharing
 - 🤖 **CI/CD pipeline** — GitHub Actions validates HTML, CSS & JS on every push
