@@ -40,11 +40,12 @@
   function neb(){
     var light=window.__lightMode;
     var g=ctx.createRadialGradient(W*.25,H*.3,0,W*.25,H*.3,W*.55);
-    g.addColorStop(0,light?'rgba(200,140,40,.04)':'rgba(0,180,220,.055)');
+    /* Light: indigo/violet nebula — matches Option A */
+    g.addColorStop(0,light?'rgba(92,90,224,.07)':'rgba(0,180,220,.055)');
     g.addColorStop(1,'rgba(0,0,0,0)');
     ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
     g=ctx.createRadialGradient(W*.78,H*.72,0,W*.78,H*.72,W*.45);
-    g.addColorStop(0,light?'rgba(180,100,60,.03)':'rgba(120,80,240,.045)');
+    g.addColorStop(0,light?'rgba(130,80,200,.05)':'rgba(120,80,240,.045)');
     g.addColorStop(1,'rgba(0,0,0,0)');
     ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
   }
@@ -53,11 +54,11 @@
       vx:Math.cos(a)*SP*(0.4+Math.random()*.6),vy:Math.sin(a)*SP*(0.4+Math.random()*.6),
       r:MR+Math.random()*(XR-MR),ph:Math.random()*Math.PI*2});}}
   /* nc = node color
-   * Dark: cool cyan/blue (hsl ~185). Light: warm amber/gold (hsl ~35) */
+   * Dark: cool cyan/blue (hsl ~185). Light: indigo/violet (hsl ~250) — Option A */
   function nc(n,t,a){
     var light=window.__lightMode;
-    var h=light?35+Math.sin(((t+n.ph/(Math.PI*2))%1)*Math.PI*2)*20:185+Math.sin(((t+n.ph/(Math.PI*2))%1)*Math.PI*2)*42.5;
-    return'hsla('+h+','+(light?'85%':'100%')+','+(light?'52%':'70%')+','+a+')';}
+    var h=light?250+Math.sin(((t+n.ph/(Math.PI*2))%1)*Math.PI*2)*20:185+Math.sin(((t+n.ph/(Math.PI*2))%1)*Math.PI*2)*42.5;
+    return'hsla('+h+','+(light?'75%':'100%')+','+(light?'55%':'70%')+','+a+')';}
   function draw(ts){
     if(paused){requestAnimationFrame(draw);return;}
     var light=window.__lightMode;
@@ -69,8 +70,9 @@
     for(var i=0;i<nodes.length;i++)for(var j=i+1;j<nodes.length;j++){
       var dx=nodes[i].x-nodes[j].x,dy=nodes[i].y-nodes[j].y,d=Math.sqrt(dx*dx+dy*dy);
       if(d<D){
-        var h=light?35+Math.sin(((t+(nodes[i].ph+nodes[j].ph)/2/(Math.PI*2))%1)*Math.PI*2)*20:185+Math.sin(((t+(nodes[i].ph+nodes[j].ph)/2/(Math.PI*2))%1)*Math.PI*2)*42.5;
-        ctx.strokeStyle='hsla('+h+','+(light?'80%':'90%')+','+(light?'45%':'65%')+','+(1-d/D)*(light?.10:.28)+')';
+        var h=light?250+Math.sin(((t+(nodes[i].ph+nodes[j].ph)/2/(Math.PI*2))%1)*Math.PI*2)*20:185+Math.sin(((t+(nodes[i].ph+nodes[j].ph)/2/(Math.PI*2))%1)*Math.PI*2)*42.5;
+        /* Lines: lighter alpha in light mode since canvas opacity handles overall visibility */
+        ctx.strokeStyle='hsla('+h+','+(light?'70%':'90%')+','+(light?'50%':'65%')+','+(1-d/D)*(light?.22:.28)+')';
         ctx.beginPath();ctx.moveTo(nodes[i].x,nodes[i].y);ctx.lineTo(nodes[j].x,nodes[j].y);ctx.stroke();}}
     for(var i=0;i<nodes.length;i++){var n=nodes[i];
       var gw=[[n.r*5,.04],[n.r*3,.09],[n.r*1.8,.18]];
