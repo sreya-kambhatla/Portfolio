@@ -52,9 +52,19 @@ document.documentElement.classList.add('js-loaded');
   cards.forEach(function(card){
     card.addEventListener('touchstart', function(e){
       if(e.target.closest('a,button')) return;
+
+      // Read state BEFORE clearing anything
       var isOpen = card.classList.contains('tapped');
+
+      // Close all cards (including this one if it was open)
       cards.forEach(function(c){ c.classList.remove('tapped'); });
-      if(!isOpen) card.classList.add('tapped');
+
+      // Only re-open if it was closed before this tap.
+      // If isOpen was true, the forEach already collapsed it -- we're done.
+      // This gives true toggle: tap to expand, tap again to collapse.
+      if(!isOpen){
+        card.classList.add('tapped');
+      }
     }, {passive:true});
   });
 })();
