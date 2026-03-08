@@ -1,3 +1,10 @@
+/* ── JS LOADED SIGNAL ───────────────────────────────────────
+ * Runs first. Adds "js-loaded" to <html> so CSS knows JS is
+ * active and can safely apply the opacity:0 reveal animations.
+ * Without this class, all tiles remain fully visible as a fallback.
+ */
+document.documentElement.classList.add('js-loaded');
+
 /* ── HAMBURGER NAV ──────────────────────────────────────────
  * How it works:
  * 1. Click the hamburger → toggle class "open" on both the
