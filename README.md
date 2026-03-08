@@ -10,6 +10,13 @@ A dark glassmorphism portfolio built from scratch with vanilla HTML, CSS, and Ja
 
 ---
 
+## 🖼️ Preview
+
+> Visit the [live site](https://sreya-kambhatla.github.io/Portfolio/) to see it in action
+
+---
+
+
 ## ✨ Features
 
 ### 🎨 Design & Theming
