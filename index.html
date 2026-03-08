@@ -67,7 +67,7 @@
           <a href="https://www.linkedin.com/in/sreya-kambhatla/" target="_blank" class="social-btn" data-tip="LinkedIn"><svg><use href="#i-linkedin"/></svg></a>
           <a href="https://github.com/sreya-kambhatla" target="_blank" class="social-btn" data-tip="GitHub"><svg><use href="#i-github"/></svg></a>
           <a href="https://calendly.com/sreyakambhatla/30min" target="_blank" class="social-btn" data-tip="Book a Call"><svg><use href="#i-calendar"/></svg></a>
-          <a href="/cdn-cgi/l/email-protection#92e1e0f7ebf3f9f3fff0faf3e6fef3d2fde7e6fefdfdf9bcf1fdff" class="social-btn" data-tip="Email"><svg><use href="#i-email"/></svg></a>
+          <a href="#" id="emailSocialBtn" class="social-btn" data-tip="Email"><svg><use href="#i-email"/></svg></a>
           &nbsp;
           <a href="Sreya_Kambhatla_Resume.pdf" download class="dl-btn"><svg><use href="#i-download"/></svg>Resume</a>
         </div>
@@ -397,7 +397,7 @@
         <form id="composeForm">
           <div class="compose-row">
             <span class="compose-row-label">To:</span>
-            <span class="compose-to-chip"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0f7c7d6a766e646e626d676e7b636e4f607a7b63606064216c6062">[email&#160;protected]</a></span>
+            <span class="compose-to-chip" id="composeToChip"></span>
           </div>
           <div class="compose-row">
             <span class="compose-row-label">Name:</span>
@@ -430,5 +430,28 @@
 <footer>Built by Sreya Kambhatla &nbsp;&middot;&nbsp; 2026</footer>
 
 <script src="script.js"></script>
+<script>
+/* Build email at runtime so Cloudflare's static scanner never sees it.
+ * Cloudflare obfuscates plain email addresses in HTML — assembling the
+ * string in JS bypasses this entirely. */
+(function(){
+  var u = 'sreyakambhatla';
+  var d = 'outlook.com';
+  var email = u + '@' + d;
+
+  /* Social button — set href to mailto: */
+  var btn = document.getElementById('emailSocialBtn');
+  if(btn) btn.href = 'mailto:' + email;
+
+  /* Compose-to chip — show the address as a styled link */
+  var chip = document.getElementById('composeToChip');
+  if(chip){
+    var a = document.createElement('a');
+    a.href = 'mailto:' + email;
+    a.textContent = email;
+    chip.appendChild(a);
+  }
+})();
+</script>
 </body>
 </html>
