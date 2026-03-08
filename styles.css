@@ -687,7 +687,8 @@ footer{text-align:center;padding:24px;font-size:.78rem;color:var(--dim);
   .nav-links li{ width:100%; }
   .nav-links a{
     display:block;
-    padding:14px 24px;
+    /* 16px vertical padding = ~48px total tap target — meets Apple's 44pt guideline */
+    padding:16px 24px;
     border-radius:0;
     border:none;
     border-bottom:1px solid var(--border);
@@ -702,10 +703,16 @@ footer{text-align:center;padding:24px;font-size:.78rem;color:var(--dim);
 @media(max-width:900px){
   section{ padding:90px 20px 60px; }
 
-  /* Hero: stack photo above text, center everything */
+  /* Hero: extra padding-top gives profile ring breathing room below the nav.
+   * 64px = fixed nav height. 90px adds 26px of air above the image.
+   */
+  #hero{ padding-top:90px; }
   .hero-inner{ flex-direction:column; text-align:center; }
-  .social-row{ justify-content:center; }
+  .social-row{ justify-content:center; flex-wrap:wrap; }
   .hero-bio{ max-width:100%; }
+
+  /* Tighten section title gap — 48px is generous on small screens */
+  .sec-title{ margin-bottom:28px; }
 
   /* Education: collapse to single left-aligned column.
    *
@@ -745,8 +752,12 @@ footer{text-align:center;padding:24px;font-size:.78rem;color:var(--dim);
   .hero-name{ font-size:2.2rem; }
   .sec-title{ font-size:1.9rem; }
 
-  /* Profile ring: shrink from 240px to fit on a 375px screen */
+  /* Profile ring: shrink from 240px to fit on a 375px screen.
+   * object-position nudged from 18% to 12% so the face sits
+   * slightly lower in the circular crop — avoids top-of-head clipping.
+   */
   .profile-ring{ width:180px; height:180px; }
+  .profile-img{ object-position:center 12%; }
 
   /* Stats row: 3 tiles side-by-side is too cramped — stack them */
   .stats-row{ grid-template-columns:1fr 1fr; gap:10px; }
@@ -757,6 +768,12 @@ footer{text-align:center;padding:24px;font-size:.78rem;color:var(--dim);
   /* Tech stack: all panels stacked */
   .stack-outer{ grid-template-columns:1fr; }
   .sp-dsml{ grid-column:auto; }
+
+  /* Quotes label: letter-spacing:.26em is too wide on mobile —
+   * the text exceeds screen width and breaks outside the stars.
+   * Reducing to .1em keeps it on one line at all screen sizes.
+   */
+  .quotes-label{ font-size:.7rem; letter-spacing:.1em; }
 
   /* Quotes card: reduce side padding so long quotes don't overflow */
   .quotes-card{ padding:28px 18px 22px; }
