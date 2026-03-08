@@ -1,2 +1,31 @@
-branches:
-  - main
+name: Deploy Portfolio
+
+on:
+  push:
+    branches:
+      - Base-Code
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate HTML
+        run: |
+          curl -s --data-binary @index.html \
+            -H "Content-Type: text/html; charset=utf-8" \
+            "https://validator.w3.org/nu/?out=text" | \
+            grep -v "^$" | grep -v "Info:" || true
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
+          publish_branch: gh-pages
