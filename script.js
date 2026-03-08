@@ -1,4 +1,76 @@
-/* THEME TOGGLE
+/* ── HAMBURGER NAV ──────────────────────────────────────────
+ * How it works:
+ * 1. Click the hamburger → toggle class "open" on both the
+ *    button (animates bars → X) and the nav-links (expands drawer).
+ * 2. Click any nav link → close the menu automatically.
+ * 3. Click outside the nav → close the menu.
+ * The open/close animation is handled entirely in CSS using
+ * max-height transition — no JS animation needed.
+ */
+(function(){
+  var hamburger = document.getElementById('navHamburger');
+  var navLinks  = document.getElementById('navLinks');
+
+  function openMenu(){
+    hamburger.classList.add('open');
+    navLinks.classList.add('open');
+    hamburger.setAttribute('aria-expanded','true');
+  }
+  function closeMenu(){
+    hamburger.classList.remove('open');
+    navLinks.classList.remove('open');
+    hamburger.setAttribute('aria-expanded','false');
+  }
+
+  hamburger.addEventListener('click', function(e){
+    e.stopPropagation(); // Don't bubble to document (would close immediately)
+    navLinks.classList.contains('open') ? closeMenu() : openMenu();
+  });
+
+  // Close menu when any nav link is tapped
+  navLinks.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', closeMenu);
+  });
+
+  // Close menu when tapping outside the nav
+  document.addEventListener('click', function(e){
+    if(!e.target.closest('#mainNav')) closeMenu();
+  });
+})();
+
+/* ── TAP-TO-EXPAND JOB CARDS ────────────────────────────────
+ * On desktop, job details open on :hover (pure CSS).
+ * On touch devices, hover doesn't exist — so we listen for
+ * touchstart and toggle a class "tapped" on the card instead.
+ * CSS rules for .job-wrap.tapped mirror the :hover rules.
+ *
+ * We use `touchstart` (not `click`) because it fires immediately
+ * on iOS/Android without the 300ms click delay.
+ *
+ * Only active on touch devices — desktop hover still works normally.
+ */
+(function(){
+  // Only run on touch-capable devices
+  if(!('ontouchstart' in window)) return;
+
+  var cards = document.querySelectorAll('.job-wrap');
+  cards.forEach(function(card){
+    card.addEventListener('touchstart', function(e){
+      // Don't hijack taps on links or buttons inside the card
+      if(e.target.closest('a,button')) return;
+
+      var isOpen = card.classList.contains('tapped');
+
+      // Close all other cards first
+      cards.forEach(function(c){ c.classList.remove('tapped'); });
+
+      // Toggle this card
+      if(!isOpen) card.classList.add('tapped');
+    }, {passive:true});
+  });
+})();
+
+
  *
  * How it works:
  * 1. On load, check localStorage for saved preference (so it persists across visits)
@@ -32,10 +104,16 @@
 })();
 
 
-/* CANVAS */
+/* CANVAS
+ * On mobile, we cut the node count roughly in half.
+ * 70 nodes × 70 connection checks = ~2,450 distance calculations per frame.
+ * On a phone GPU, this can drain battery noticeably.
+ * window.innerWidth < 768 detects mobile at load time.
+ */
 (function(){
   var cv=document.getElementById('bgCanvas'),ctx=cv.getContext('2d');
-  var N=70,D=150,SP=0.45,MR=1.2,XR=2.8,LW=0.4,CS=0.0004;
+  var isMobile = window.innerWidth < 768;
+  var N=isMobile?35:70, D=150,SP=0.45,MR=1.2,XR=2.8,LW=0.4,CS=0.0004;
   var W,H,nodes=[],paused=false;
   function neb(){
     var light=window.__lightMode;
