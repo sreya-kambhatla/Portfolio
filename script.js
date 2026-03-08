@@ -51,34 +51,26 @@ document.documentElement.classList.add('js-loaded');
   var cards = document.querySelectorAll('.job-wrap');
 
   cards.forEach(function(card){
-    var startX = 0;
-    var startY = 0;
+    var didScroll = false;
 
-    // Record where the finger landed
+    // touchstart: reset the scroll flag each new gesture
     card.addEventListener('touchstart', function(e){
-      startX = e.touches[0].clientX;
-      startY = e.touches[0].clientY;
+      didScroll = false;
     }, {passive:true});
 
-    // Only act on touchend so we don't conflict with scrolling.
-    // If the finger moved more than 10px it was a scroll -- ignore it.
+    // touchmove: fires during any scroll — mark this gesture as a scroll
+    card.addEventListener('touchmove', function(e){
+      didScroll = true;
+    }, {passive:true});
+
+    // touchend: finger lifted — only toggle if no scroll happened
     card.addEventListener('touchend', function(e){
-      if(e.target.closest('a,button')) return;
+      if(didScroll) return;                      // was a scroll, ignore
+      if(e.target.closest('a,button')) return;  // tapped a link/button, ignore
 
-      var dx = Math.abs(e.changedTouches[0].clientX - startX);
-      var dy = Math.abs(e.changedTouches[0].clientY - startY);
-      if(dx > 10 || dy > 10) return; // was a scroll, not a tap
-
-      // Read open state before changing anything
       var isOpen = card.classList.contains('tapped');
-
-      // Collapse all cards
       cards.forEach(function(c){ c.classList.remove('tapped'); });
-
-      // If this card was closed, open it. If it was open, leave it closed.
-      if(!isOpen){
-        card.classList.add('tapped');
-      }
+      if(!isOpen) card.classList.add('tapped');
     }, {passive:true});
   });
 })();
