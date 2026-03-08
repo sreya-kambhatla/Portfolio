@@ -524,7 +524,7 @@ section{position:relative;z-index:2;padding:110px 48px 80px;}
 .q-slide:nth-child(4) .q-attr{color:var(--green);}
 
 .q-dots{display:flex;gap:8px;justify-content:center;margin-top:22px;position:relative;z-index:1;}
-.q-dot{width:6px;height:6px;border-radius:50%;background:var(--border);
+.q-dot{width:4px;height:4px;border-radius:50%;background:var(--border);
   border:none;cursor:pointer;padding:0;transition:background .3s,transform .3s;}
 .q-dot.on{background:var(--cyan);transform:scale(1.5);}
 
