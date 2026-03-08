@@ -6,15 +6,7 @@
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](#)
 [![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)](#)
 
-A dark glassmorphism portfolio built from scratch with vanilla HTML, CSS, and JavaScript — no frameworks, no build step. Features animated particle backgrounds, scroll-triggered reveals, a warm light mode, and a fully responsive layout.
-
----
-
-## 🖼️ Preview
-
-> Visit the [live site](https://sreya-kambhatla.github.io/Portfolio/) to see it in action
-
-[![Portfolio Preview](https://img.shields.io/badge/%E2%96%B6_View_Live-sreya--kambhatla.github.io%2FPortfolio-00d4ff?style=flat-square&labelColor=060b14)](https://sreya-kambhatla.github.io/Portfolio/)
+A dark glassmorphism portfolio built from scratch with vanilla HTML, CSS, and JavaScript — no frameworks, no build step.
 
 ---
 
@@ -27,13 +19,21 @@ A dark glassmorphism portfolio built from scratch with vanilla HTML, CSS, and Ja
 
 ### 🧩 Sections & Components
 - 🎬 **Scroll-triggered reveal animations** — elements slide in as you scroll
-- 💼 **Horizontal experience timeline** — shimmer wave animation, hover-to-expand job details
+- 💼 **Horizontal experience timeline** — shimmer wave animation, hover-to-expand job details on desktop
 - 🛠️ **5-panel tech stack grid** — asymmetric layout with subtle category tints
+- 💬 **Manager quotes carousel** — auto-rotating slideshow with smooth transitions
+- 📬 **Email compose panel** — inline contact form powered by EmailJS with auto-reply
+
+### 📱 Mobile & Responsive
+- **Hamburger nav** — animated slide-down drawer with X close button
+- **Scroll reveal on all sections** — education timeline, tech stack, stats, and connect all animate in
+- **Optimised canvas** — particle count halved on mobile to preserve battery and keep scrolling smooth
+- **Touch-safe** — no hover dependencies, backdrop-filter removed on mobile for 60fps scrolling
 
 ### ⚙️ Technical
 - 🖼️ **OG social preview image** — auto-generated with Python + Pillow for link sharing
 - 🤖 **CI/CD pipeline** — GitHub Actions validates HTML, CSS & JS on every push
-- 📱 **Fully responsive** — mobile, tablet, and desktop
+- ⚡ **Zero dependencies** — vanilla JS only, no frameworks, no build step
 
 ---
 
