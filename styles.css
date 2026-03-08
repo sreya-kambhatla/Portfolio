@@ -847,16 +847,67 @@ footer{text-align:center;padding:24px;font-size:.78rem;color:var(--dim);
 }
 
 /* ══════════════════════════════════════════════════════════
-   TOUCH DEVICE — TAP-TO-EXPAND JOB CARDS
-   On desktop, job details expand on :hover.
-   On touch, we add class .tapped to the job-wrap via JS.
-   This rule mirrors the hover effect using that class instead.
+   MOBILE PERFORMANCE — experience section
+   Three targeted fixes to eliminate scroll lag:
+
+   1. backdrop-filter:blur removed on mobile.
+      blur() forces the GPU to sample + composite every pixel
+      behind the element on every scroll frame. With 4 cards
+      stacked it compounds badly. Solid background is visually
+      near-identical but costs nothing to render.
+
+   2. max-height transition replaced with opacity+transform.
+      Animating max-height causes layout reflow on every frame
+      because the document height is changing. opacity and
+      transform are compositor-only — the GPU handles them
+      entirely without touching the layout engine.
+
+   3. will-change:transform on job-wrap.
+      Tells the browser to promote each card to its own GPU
+      layer before scrolling starts — avoids mid-scroll
+      layer promotion which causes a visible stutter.
 ══════════════════════════════════════════════════════════ */
-.job-wrap.tapped .job-detail{ max-height:600px; opacity:1; }
-.job-wrap:nth-child(1).tapped .job-card{ border-color:rgba(0,212,255,.38); box-shadow:0 0 22px rgba(0,212,255,.12); }
-.job-wrap:nth-child(2).tapped .job-card{ border-color:rgba(167,139,250,.38); box-shadow:0 0 22px rgba(167,139,250,.12); }
-.job-wrap:nth-child(3).tapped .job-card{ border-color:rgba(245,166,35,.38);  box-shadow:0 0 22px rgba(245,166,35,.12); }
-.job-wrap:nth-child(4).tapped .job-card{ border-color:rgba(38,217,138,.38);  box-shadow:0 0 22px rgba(38,217,138,.12); }
+@media(max-width:900px){
+
+  /* Fix 1: solid background replaces backdrop-filter */
+  .job-card{
+    background:rgba(14,30,58,0.96);
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+  }
+
+  /* Fix 2: opacity+transform instead of max-height
+   * The detail panel starts invisible and translated down 8px.
+   * When .tapped is added it fades in and slides up.
+   * overflow:hidden is still needed to clip the content when closed,
+   * but we no longer animate height — just visibility. */
+  .job-detail{
+    max-height:none;
+    overflow:hidden;
+    opacity:0;
+    transform:translateY(8px);
+    transition:opacity .35s ease, transform .35s ease;
+    /* height:0 when closed — toggled by max-height removal */
+  }
+  .job-wrap.tapped .job-detail{
+    opacity:1;
+    transform:translateY(0);
+  }
+  /* Keep closed state clipped — use visibility+max-height as a binary switch */
+  .job-detail{ max-height:0; }
+  .job-wrap.tapped .job-detail{ max-height:800px; }
+
+  /* Fix 3: promote cards to compositor layer before scroll */
+  .job-wrap{
+    will-change:transform;
+  }
+
+  /* Tapped border highlights */
+  .job-wrap:nth-child(1).tapped .job-card{ border-color:rgba(0,212,255,.38); box-shadow:0 0 22px rgba(0,212,255,.12); }
+  .job-wrap:nth-child(2).tapped .job-card{ border-color:rgba(167,139,250,.38); box-shadow:0 0 22px rgba(167,139,250,.12); }
+  .job-wrap:nth-child(3).tapped .job-card{ border-color:rgba(245,166,35,.38);  box-shadow:0 0 22px rgba(245,166,35,.12); }
+  .job-wrap:nth-child(4).tapped .job-card{ border-color:rgba(38,217,138,.38);  box-shadow:0 0 22px rgba(38,217,138,.12); }
+}
 
 /* Tap hint removed — cards now auto-expand on scroll via IntersectionObserver */
 
