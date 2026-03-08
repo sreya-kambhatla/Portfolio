@@ -707,14 +707,25 @@ footer{text-align:center;padding:24px;font-size:.78rem;color:var(--dim);
   .social-row{ justify-content:center; }
   .hero-bio{ max-width:100%; }
 
-  /* Education: move the vertical timeline line to the left
-     so both cards can stack left-aligned */
+  /* Education: collapse to single left-aligned column.
+   *
+   * HOW THE ALIGNMENT WORKS:
+   * ::before line sits at left:20px from .edu-timeline.
+   * .edu-dot is position:absolute inside .edu-item, also left-anchored.
+   *
+   * On desktop both use left:50% + translateX(-50%) so their CENTERS align.
+   * On mobile we remove translateX, so left: now sets the LEFT EDGE not center.
+   * Dot is 12px wide, so to center it ON the 2px line at left:20px:
+   *   dot left = 20px - (12px / 2) = 14px  <-- centers the dot on the line
+   *
+   * Card padding-left = line(20px) + half-line(1px) + breathing room(15px) = 36px
+   */
   .edu-timeline::before{ left:20px; transform:none; }
   .edu-item.left,.edu-item.right{
     justify-content:flex-start;
-    padding-left:44px;    /* Space for the dot on the left */
+    padding-left:36px;
   }
-  .edu-dot{ left:20px; transform:none; }
+  .edu-dot{ left:14px; transform:none; }
   .edu-tile{ width:100%; }
 
   /* Experience: 2-column grid instead of 4 */
@@ -748,7 +759,36 @@ footer{text-align:center;padding:24px;font-size:.78rem;color:var(--dim);
   .sp-dsml{ grid-column:auto; }
 
   /* Quotes card: reduce side padding so long quotes don't overflow */
-  .quotes-card{ padding:28px 20px 22px; }
+  .quotes-card{ padding:28px 18px 22px; }
+
+  /* HOW THE QUOTES FIX WORKS:
+   * On desktop, all 4 slides are stacked via position:absolute;inset:0
+   * inside a fixed min-height container. Only the active one is visible.
+   * This works great on wide screens where quotes are short per line.
+   *
+   * On mobile, long quotes wrap to many lines and overflow that fixed height.
+   * Fix: switch the stage to normal block flow. Hide all slides with
+   * display:none, show only the active one with display:flex.
+   * The card then grows naturally to fit any quote length.
+   * We keep the opacity/transform transition by applying it on display:flex.
+   */
+  .quotes-stage{
+    min-height:0;
+    display:block;
+    position:static;
+  }
+  .q-slide{
+    position:static;
+    display:none;
+    inset:auto;
+  }
+  .q-slide.active{
+    display:flex;
+    opacity:1;
+    transform:translateY(0);
+  }
+  .q-text{ font-size:.88rem; line-height:1.75; }
+  .q-dots{ margin-top:18px; }
 
   /* Connect section: reduce headline font */
   .connect-headline{ font-size:1.35rem; }
