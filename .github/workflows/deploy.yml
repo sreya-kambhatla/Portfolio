@@ -1,15 +1,12 @@
-name: Deploy Portfolio
+name: Validate Portfolio
 
 on:
   push:
     branches:
       - Base-Code
 
-permissions:
-  contents: write
-
 jobs:
-  deploy:
+  validate:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,9 +20,12 @@ jobs:
             "https://validator.w3.org/nu/?out=text" | \
             grep -v "^$" | grep -v "Info:" || true
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./
-          publish_branch: gh-pages
+      - name: Check JS syntax
+        run: node --check script.js && echo "JS valid"
+
+      - name: Check CSS brace balance
+        run: |
+          OPENS=$(grep -o '{' styles.css | wc -l)
+          CLOSES=$(grep -o '}' styles.css | wc -l)
+          echo "Opens: $OPENS  Closes: $CLOSES"
+          [ "$OPENS" -eq "$CLOSES" ] && echo "CSS valid" || (echo "CSS brace mismatch" && exit 1)
