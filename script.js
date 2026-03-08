@@ -49,19 +49,33 @@ document.documentElement.classList.add('js-loaded');
   if(!('ontouchstart' in window)) return;
 
   var cards = document.querySelectorAll('.job-wrap');
+
   cards.forEach(function(card){
+    var startX = 0;
+    var startY = 0;
+
+    // Record where the finger landed
     card.addEventListener('touchstart', function(e){
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+    }, {passive:true});
+
+    // Only act on touchend so we don't conflict with scrolling.
+    // If the finger moved more than 10px it was a scroll -- ignore it.
+    card.addEventListener('touchend', function(e){
       if(e.target.closest('a,button')) return;
 
-      // Read state BEFORE clearing anything
+      var dx = Math.abs(e.changedTouches[0].clientX - startX);
+      var dy = Math.abs(e.changedTouches[0].clientY - startY);
+      if(dx > 10 || dy > 10) return; // was a scroll, not a tap
+
+      // Read open state before changing anything
       var isOpen = card.classList.contains('tapped');
 
-      // Close all cards (including this one if it was open)
+      // Collapse all cards
       cards.forEach(function(c){ c.classList.remove('tapped'); });
 
-      // Only re-open if it was closed before this tap.
-      // If isOpen was true, the forEach already collapsed it -- we're done.
-      // This gives true toggle: tap to expand, tap again to collapse.
+      // If this card was closed, open it. If it was open, leave it closed.
       if(!isOpen){
         card.classList.add('tapped');
       }
