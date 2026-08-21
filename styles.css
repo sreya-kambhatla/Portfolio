@@ -95,6 +95,9 @@
 }
 
 /* ── TECH STACK chips — per-category colours restored ───── */
+[data-theme="light"] .sp-ba .chip{
+  background:rgba(26,122,80,.12);border-color:rgba(26,122,80,.40);color:rgba(12,90,58,.95);
+}
 [data-theme="light"] .sp-lang .chip{
   background:rgba(59,64,196,.12);border-color:rgba(59,64,196,.40);color:rgba(35,40,160,.95);
 }
@@ -575,13 +578,14 @@ section{position:relative;z-index:2;padding:110px 48px 80px;}
 /* ══ TECH STACK — 5-panel matching reference ══ */
 .stack-outer{display:grid;
   grid-template-columns:1fr 1.4fr 1fr;
-  grid-template-rows:auto auto;
+  grid-template-rows:auto auto auto;
   gap:18px;}
-.sp-lang {grid-column:1;grid-row:1;}
-.sp-dsml {grid-column:2;grid-row:1/3;}
-.sp-tools{grid-column:3;grid-row:1;}
-.sp-cloud{grid-column:1;grid-row:2;}
-.sp-viz  {grid-column:3;grid-row:2;}
+.sp-ba   {grid-column:1/4;grid-row:1;}
+.sp-lang {grid-column:1;grid-row:2;}
+.sp-dsml {grid-column:2;grid-row:2/4;}
+.sp-tools{grid-column:3;grid-row:2;}
+.sp-cloud{grid-column:1;grid-row:3;}
+.sp-viz  {grid-column:3;grid-row:3;}
 .stack-panel{padding:22px 20px;}
 .stack-panel-title{font-family:"Syne",sans-serif;font-size:.75rem;font-weight:700;
   letter-spacing:.1em;text-transform:uppercase;color:var(--text);
@@ -592,6 +596,7 @@ section{position:relative;z-index:2;padding:110px 48px 80px;}
   transition:opacity .2s,transform .2s;cursor:default;letter-spacing:.01em;}
 .chip:hover{opacity:.82;transform:translateY(-1px);}
 /* Subtle tinted glass per category */
+.sp-ba    .chip{background:rgba(38,217,138,.06);border-color:rgba(38,217,138,.18);color:rgba(175,235,205,.85);}
 .sp-lang  .chip{background:rgba(59,130,246,.06);border-color:rgba(59,130,246,.18);color:rgba(180,205,240,.85);}
 .sp-dsml  .chip{background:rgba(139,92,246,.06);border-color:rgba(139,92,246,.18);color:rgba(210,200,245,.85);}
 .sp-tools .chip{background:rgba(20,184,166,.06);border-color:rgba(20,184,166,.18);color:rgba(170,230,225,.85);}
@@ -671,6 +676,49 @@ section{position:relative;z-index:2;padding:110px 48px 80px;}
   font-weight: 300;
   line-height: 1.6;
   flex: 1;
+}
+
+/* Problem / Outcome case-study block */
+.proj-case {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 11px 13px;
+  border-radius: 9px;
+  background: rgba(255,255,255,.035);
+  border: 1px solid rgba(255,255,255,.07);
+}
+.pc-row {
+  display: grid;
+  grid-template-columns: 58px 1fr;
+  gap: 9px;
+  align-items: start;
+}
+.pc-k {
+  font-family: "Syne", sans-serif;
+  font-size: .58rem;
+  font-weight: 700;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  padding-top: 2px;
+  color: var(--muted);
+}
+.pc-v {
+  font-size: .74rem;
+  font-weight: 300;
+  line-height: 1.55;
+  color: var(--muted);
+}
+/* Label picks up each card's accent colour */
+.proj-card:has(.proj-banner--cyan)   .pc-k { color: var(--cyan); }
+.proj-card:has(.proj-banner--purple) .pc-k { color: var(--purple); }
+.proj-card:has(.proj-banner--rose)   .pc-k { color: var(--rose); }
+.proj-card:has(.proj-banner--green)  .pc-k { color: var(--green); }
+.proj-card:has(.proj-banner--amber)  .pc-k { color: var(--amber); }
+
+[data-theme="light"] .proj-case {
+  background: rgba(0,0,0,.03);
+  border-color: rgba(0,0,0,.08);
 }
 
 .proj-chips {
@@ -833,6 +881,7 @@ footer{text-align:center;padding:24px;font-size:.78rem;color:var(--dim);
   .connect-wrapper{grid-template-columns:1fr;}
   .stack-outer{grid-template-columns:1fr 1fr;}
   /* Data Science panel spans full width since it has the most chips */
+  .sp-ba{grid-column:1/3;grid-row:auto;}
   .sp-dsml{grid-column:1/3;grid-row:auto;}
   .sp-lang,.sp-tools,.sp-cloud,.sp-viz{grid-column:auto;grid-row:auto;}
 }
@@ -986,6 +1035,7 @@ footer{text-align:center;padding:24px;font-size:.78rem;color:var(--dim);
 
   /* Tech stack: all panels stacked */
   .stack-outer{ grid-template-columns:1fr; }
+  .sp-ba{ grid-column:auto; }
   .sp-dsml{ grid-column:auto; }
 
   /* Quotes label: letter-spacing:.26em is too wide on mobile —

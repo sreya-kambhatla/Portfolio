@@ -316,7 +316,20 @@
     <div class="sec-label reveal">Technical Arsenal</div>
     <h2 class="sec-title reveal" style="transition-delay:.08s">Tech <span>Stack</span></h2>
     <div class="stack-outer">
-      <div class="glass-tile stack-panel sp-lang reveal">
+      <div class="glass-tile stack-panel sp-ba reveal">
+        <div class="stack-panel-title">&#128203; Business Analysis</div>
+        <div class="stack-chips">
+          <span class="chip">Requirements Elicitation</span><span class="chip">User Stories &amp; Acceptance Criteria</span>
+          <span class="chip">Process Mapping</span><span class="chip">BRD / FRD Authoring</span>
+          <span class="chip">Gap Analysis</span><span class="chip">UAT &amp; Validation Testing</span>
+          <span class="chip">Stakeholder Management</span><span class="chip">Requirements Traceability</span>
+          <span class="chip">Decision-Tree Workflows</span><span class="chip">Root Cause Analysis</span>
+          <span class="chip">KPI Definition</span><span class="chip">Agile / Scrum</span>
+          <span class="chip">Sprint Planning</span><span class="chip">Backlog Refinement</span>
+          <span class="chip">Data Storytelling</span><span class="chip">Workflow Automation</span>
+        </div>
+      </div>
+      <div class="glass-tile stack-panel sp-lang reveal" style="transition-delay:.05s">
         <div class="stack-panel-title">&#128013; Programming Languages</div>
         <div class="stack-chips">
           <span class="chip">Python</span><span class="chip">SQL</span>
@@ -344,7 +357,8 @@
           <span class="chip">Docker</span><span class="chip">GitHub</span>
           <span class="chip">Jupyter</span><span class="chip">Selenium</span>
           <span class="chip">BeautifulSoup</span><span class="chip">ServiceNow</span>
-          <span class="chip">Jira</span><span class="chip">Visio</span>
+          <span class="chip">Jira</span><span class="chip">Confluence</span>
+          <span class="chip">Visio</span><span class="chip">SharePoint</span>
           <span class="chip">Elastic</span><span class="chip">Flow Engine</span>
         </div>
       </div>
@@ -432,6 +446,10 @@
           <div class="proj-accent proj-accent--cyan"></div>
           <div class="proj-title">OTI Tracker AI</div>
           <div class="proj-tagline">React BI dashboard replacing Excel-based team task tracking — features smart data import with diff view, animated KPI flip-cards, and Ori, an AI assistant powered by the Claude API for natural language workload queries</div>
+          <div class="proj-case">
+            <div class="pc-row"><span class="pc-k">Problem</span><span class="pc-v">Team workload lived in shared Excel files &mdash; no version history, and no way to answer a status question without opening the sheet.</span></div>
+            <div class="pc-row"><span class="pc-k">Outcome</span><span class="pc-v">One BI view with natural-language querying; workload questions answered without touching the source file.</span></div>
+          </div>
           <div class="proj-chips">
             <span class="chip">React 18</span><span class="chip">Vite</span><span class="chip">Claude API</span><span class="chip">JavaScript</span><span class="chip">SheetJS</span><span class="chip">Vercel</span>
           </div>
@@ -491,6 +509,10 @@
           <div class="proj-accent proj-accent--purple"></div>
           <div class="proj-title">Shipment Tracking Dashboard</div>
           <div class="proj-tagline">Client-side Excel-to-dashboard converter for outbound &amp; inbound shipment tracking — import .xlsx exports, filter by delivery status and exceptions, sort records, and generate CSV/Excel reports without any backend</div>
+          <div class="proj-case">
+            <div class="pc-row"><span class="pc-k">Problem</span><span class="pc-v">Outbound &amp; inbound tracking sat in disconnected .xlsx exports, making exception handling reactive and manual.</span></div>
+            <div class="pc-row"><span class="pc-k">Outcome</span><span class="pc-v">Ops filter and export exceptions in-browser &mdash; no backend, no IT ticket, no change to the existing export workflow.</span></div>
+          </div>
           <div class="proj-chips">
             <span class="chip">JavaScript</span><span class="chip">HTML5</span><span class="chip">Tailwind CSS</span><span class="chip">SheetJS</span><span class="chip">LocalStorage</span>
           </div>
@@ -560,6 +582,10 @@
           <div class="proj-accent proj-accent--rose"></div>
           <div class="proj-title">Keylogger Detection</div>
           <div class="proj-tagline">Windows-based defensive security toolkit that identifies suspicious keylogging via process monitoring, file activity tracking, and clipboard surveillance — outputs structured CSV audit logs for threat analysis and optional ML-based process classification</div>
+          <div class="proj-case">
+            <div class="pc-row"><span class="pc-k">Problem</span><span class="pc-v">Suspicious keylogging activity left no reviewable audit trail for security triage.</span></div>
+            <div class="pc-row"><span class="pc-k">Outcome</span><span class="pc-v">Scattered process, file, and clipboard signals become structured CSV evidence an analyst can act on.</span></div>
+          </div>
           <div class="proj-chips">
             <span class="chip">Python</span><span class="chip">psutil</span><span class="chip">pywin32</span><span class="chip">Win32 API</span><span class="chip">ML Classification</span>
           </div>
@@ -639,6 +665,10 @@
           <div class="proj-accent proj-accent--green"></div>
           <div class="proj-title">Smart Parking Reservation</div>
           <div class="proj-tagline">Full-stack Flask web app (PARK) for searching, reserving, and managing parking spaces — integrates Stripe for checkout and webhook payment confirmation, SQLAlchemy ORM for bookings, and Jinja2-templated UI with cancellation and success flows</div>
+          <div class="proj-case">
+            <div class="pc-row"><span class="pc-k">Problem</span><span class="pc-v">Searching, reserving, and paying for parking were separate steps with no confirmation trail.</span></div>
+            <div class="pc-row"><span class="pc-k">Outcome</span><span class="pc-v">End-to-end booking flow with webhook-verified payment confirmation and self-service cancellation.</span></div>
+          </div>
           <div class="proj-chips">
             <span class="chip">Python</span><span class="chip">Flask</span><span class="chip">SQLAlchemy</span><span class="chip">Stripe API</span><span class="chip">SQLite</span><span class="chip">Jinja2</span>
           </div>
@@ -699,6 +729,10 @@
           <div class="proj-accent proj-accent--amber"></div>
           <div class="proj-title">University Assistant Alexa Skill</div>
           <div class="proj-tagline">Voice-powered Alexa skill helping university students access schedules, campus info, and academic resources</div>
+          <div class="proj-case">
+            <div class="pc-row"><span class="pc-k">Problem</span><span class="pc-v">Students hunted across separate portals for schedules and campus information.</span></div>
+            <div class="pc-row"><span class="pc-k">Outcome</span><span class="pc-v">Voice-first access to the same information, hands-free.</span></div>
+          </div>
           <div class="proj-chips">
             <span class="chip">Python</span><span class="chip">AWS Lambda</span><span class="chip">DynamoDB</span><span class="chip">Alexa SDK</span>
           </div>
