@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>UI Lab — Sreya Kambhatla Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet"/>
+<style>
+/* Palette copied from styles.css so this page is fully self-contained
+   and cannot be affected by (or affect) the live site. */
+:root{
+  --bg:#060b14;--bg2:#0c1525;--glass:rgba(14,30,58,0.60);
+  --border:rgba(255,255,255,0.08);
+  --cyan:#00d4ff;--amber:#f5a623;--green:#26d98a;--purple:#a78bfa;--rose:#fb7185;
+  --text:#e8edf5;--muted:#7a8fa6;--dim:#4a5f75;
+}
+[data-theme="light"]{
+  --bg:#d4d2cb;--bg2:#cac8c0;--glass:rgba(255,253,248,0.72);
+  --border:rgba(100,90,70,0.18);
+  --cyan:#3b40c4;--amber:#b86e00;--green:#1a7a50;--purple:#5c3db8;--rose:#c03060;
+  --text:#1e1c18;--muted:#5a5244;--dim:#9a9080;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:"DM Sans",system-ui,sans-serif;
+  font-weight:300;line-height:1.6;padding:0 0 80px;transition:background .3s,color .3s;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px;}
+header.lab{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--border);
+  padding:16px 0;margin-bottom:38px;}
+header.lab .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;}
+h1{font-family:"Syne",sans-serif;font-size:1.15rem;font-weight:800;letter-spacing:-.01em;}
+h1 span{color:var(--cyan);}
+.lab-sub{font-size:.76rem;color:var(--muted);}
+.tbtn{font-family:"Syne",sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--text);background:var(--glass);border:1px solid var(--border);
+  border-radius:999px;padding:8px 16px;cursor:pointer;}
+.tbtn:hover{border-color:var(--cyan);color:var(--cyan);}
+h2.sec{font-family:"Syne",sans-serif;font-size:1.5rem;font-weight:800;margin:46px 0 6px;}
+h2.sec span{color:var(--cyan);}
+.sec-note{font-size:.82rem;color:var(--muted);margin-bottom:22px;max-width:70ch;}
+.grid{display:grid;gap:18px;}
+.g3{grid-template-columns:repeat(3,1fr);}
+.g2{grid-template-columns:repeat(2,1fr);}
+@media(max-width:940px){.g3,.g2{grid-template-columns:1fr;}}
+.card{background:var(--glass);border:1px solid var(--border);border-radius:16px;padding:20px;
+  backdrop-filter:blur(10px);}
+.card h3{font-family:"Syne",sans-serif;font-size:.95rem;font-weight:800;margin-bottom:4px;}
+.card .meta{font-size:.7rem;color:var(--dim);font-family:"Syne",sans-serif;letter-spacing:.06em;
+  text-transform:uppercase;margin-bottom:12px;}
+.card p.desc{font-size:.78rem;color:var(--muted);margin-top:12px;}
+.stage{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:12px;
+  min-height:200px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+[data-theme="light"] .stage{background:rgba(0,0,0,.03);}
+.ctrls{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;}
+.ctrls button{font-size:.72rem;font-family:"DM Sans",sans-serif;color:var(--text);
+  background:transparent;border:1px solid var(--border);border-radius:999px;padding:5px 12px;cursor:pointer;}
+.ctrls button:hover{border-color:var(--cyan);color:var(--cyan);}
+.tag{display:inline-block;font-size:.66rem;padding:2px 9px;border-radius:999px;
+  border:1px solid var(--border);color:var(--muted);margin-right:5px;}
+.tag.good{color:var(--green);border-color:var(--green);}
+.tag.warn{color:var(--amber);border-color:var(--amber);}
+
+/* ─── CHARACTER 1 : Ori the guide ─── */
+.ori{width:130px;height:150px;overflow:visible;}
+.ori .body-g{animation:breathe 3.4s ease-in-out infinite;transform-origin:65px 130px;}
+@keyframes breathe{0%,100%{transform:translateY(0) scaleY(1);}50%{transform:translateY(-3px) scaleY(1.015);}}
+.ori .eye{transition:transform .12s ease-out;}
+.ori .lid{transform-origin:center;animation:blink 5.2s infinite;}
+@keyframes blink{0%,94%,100%{transform:scaleY(0);}96%,98%{transform:scaleY(1);}}
+.ori .arm-wave{transform-origin:96px 96px;}
+.ori.waving .arm-wave{animation:wave 1.5s ease-in-out;}
+@keyframes wave{0%,100%{transform:rotate(0);}
+  15%{transform:rotate(-56deg);}30%{transform:rotate(-30deg);}
+  45%{transform:rotate(-56deg);}60%{transform:rotate(-30deg);}75%{transform:rotate(-50deg);}}
+.bubble{position:absolute;top:18px;left:50%;transform:translate(-50%,6px);opacity:0;
+  background:var(--glass);border:1px solid var(--cyan);border-radius:12px;padding:7px 14px;
+  font-size:.76rem;color:var(--text);white-space:nowrap;transition:opacity .35s,transform .35s;
+  pointer-events:none;}
+.bubble.show{opacity:1;transform:translate(-50%,0);}
+
+/* ─── CHARACTER 2 : Node assistant ─── */
+.node-a{width:130px;height:130px;overflow:visible;}
+.node-a .orbit{transform-origin:65px 65px;animation:spin 9s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.node-a .core{transform-origin:65px 65px;animation:pulse 2.6s ease-in-out infinite;}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:.95;}50%{transform:scale(1.09);opacity:1;}}
+.node-a .ring{transform-origin:65px 65px;animation:ripple 2.6s ease-out infinite;}
+@keyframes ripple{0%{transform:scale(.7);opacity:.5;}100%{transform:scale(1.7);opacity:0;}}
+.node-a.nodding{animation:nod .9s ease-in-out;}
+@keyframes nod{0%,100%{transform:translateY(0) rotate(0);}
+  30%{transform:translateY(4px) rotate(-7deg);}65%{transform:translateY(0) rotate(5deg);}}
+
+/* ─── CHARACTER 3 : Walker ─── */
+.walk-stage{height:200px;align-items:flex-end;padding-bottom:26px;}
+.walker{width:74px;height:96px;overflow:visible;position:absolute;bottom:26px;left:0;
+  will-change:transform;}
+.walker .leg-l,.walker .leg-r{transform-origin:37px 62px;}
+.walker.moving .leg-l{animation:stepA .52s linear infinite;}
+.walker.moving .leg-r{animation:stepB .52s linear infinite;}
+.walker.moving .arm-l{animation:stepB .52s linear infinite;}
+.walker.moving .arm-r{animation:stepA .52s linear infinite;}
+.walker .arm-l,.walker .arm-r{transform-origin:37px 40px;}
+@keyframes stepA{0%,100%{transform:rotate(21deg);}50%{transform:rotate(-21deg);}}
+@keyframes stepB{0%,100%{transform:rotate(-21deg);}50%{transform:rotate(21deg);}}
+.walker.moving .torso{animation:bob .26s linear infinite;}
+@keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(-2px);}}
+.walker.hi .arm-r{animation:wave2 1.4s ease-in-out;}
+@keyframes wave2{0%,100%{transform:rotate(0);}
+  20%{transform:rotate(-118deg);}40%{transform:rotate(-88deg);}
+  60%{transform:rotate(-118deg);}80%{transform:rotate(-95deg);}}
+.ground{position:absolute;left:0;right:0;bottom:24px;height:1px;
+  background:linear-gradient(90deg,transparent,var(--border) 12%,var(--border) 88%,transparent);}
+
+/* ─── BA 1 : Decision tree ─── */
+.dtree{width:100%;max-width:520px;}
+.dtree .lk{stroke:var(--dim);stroke-width:1.6;fill:none;pointer-events:none;
+  transition:stroke .25s,stroke-width .25s;}
+.dtree .lk.lit{stroke:var(--cyan);stroke-width:2.6;}
+.dtree .nd{fill:var(--bg2);stroke:var(--dim);stroke-width:1.6;cursor:pointer;
+  transition:stroke .25s,fill .25s;}
+[data-theme="light"] .dtree .nd{fill:rgba(255,253,248,.9);}
+.dtree .nd.lit{stroke:var(--cyan);fill:color-mix(in srgb,var(--cyan) 16%,transparent);}
+.dtree text{font-family:"DM Sans",sans-serif;font-size:9.5px;fill:var(--muted);pointer-events:none;}
+.dtree .nd.lit ~ text{fill:var(--text);}
+.dtree .lbl-lit{fill:var(--text);}
+
+/* ─── BA 2 : Dashboard ─── */
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;}
+.kpi{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:10px;padding:11px 12px;}
+[data-theme="light"] .kpi{background:rgba(0,0,0,.03);}
+.kpi .k{font-size:.6rem;font-family:"Syne",sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);}
+.kpi .v{font-family:"Syne",sans-serif;font-size:1.35rem;font-weight:800;color:var(--cyan);line-height:1.25;}
+.kpi.g .v{color:var(--green);} .kpi.a .v{color:var(--amber);}
+.filters{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap;}
+.filters button{font-size:.7rem;padding:4px 12px;border-radius:999px;cursor:pointer;
+  background:transparent;border:1px solid var(--border);color:var(--muted);font-family:"DM Sans",sans-serif;}
+.filters button.on{border-color:var(--cyan);color:var(--cyan);background:color-mix(in srgb,var(--cyan) 10%,transparent);}
+.spark{width:100%;height:78px;}
+.spark path.ln{fill:none;stroke:var(--cyan);stroke-width:2;stroke-linejoin:round;
+  transition:d .5s ease;}
+.spark path.ar{stroke:none;transition:d .5s ease;}
+
+/* ─── BA 3 : Process flow ─── */
+.flow{width:100%;max-width:560px;}
+.flow .fpath{fill:none;stroke:var(--cyan);stroke-width:2;
+  stroke-dasharray:var(--len);stroke-dashoffset:var(--len);}
+.flow.run .fpath{animation:draw 2.4s ease forwards;}
+@keyframes draw{to{stroke-dashoffset:0;}}
+.flow .fbox{fill:var(--bg2);stroke:var(--dim);stroke-width:1.5;opacity:0;}
+[data-theme="light"] .flow .fbox{fill:rgba(255,253,248,.92);}
+.flow.run .fbox{animation:pop .45s ease forwards;}
+.flow .fbox:nth-of-type(1){animation-delay:.1s;} .flow .fbox:nth-of-type(2){animation-delay:.65s;}
+.flow .fbox:nth-of-type(3){animation-delay:1.2s;} .flow .fbox:nth-of-type(4){animation-delay:1.75s;}
+@keyframes pop{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+.flow text{font-family:"DM Sans",sans-serif;font-size:10px;fill:var(--muted);opacity:0;}
+.flow.run text{animation:pop .45s ease forwards;}
+.flow text:nth-of-type(1){animation-delay:.2s;} .flow text:nth-of-type(2){animation-delay:.75s;}
+.flow text:nth-of-type(3){animation-delay:1.3s;} .flow text:nth-of-type(4){animation-delay:1.85s;}
+
+/* ─── BA 4 : As-is / To-be ─── */
+.cmp{position:relative;width:100%;height:210px;border-radius:10px;overflow:hidden;
+  border:1px solid var(--border);cursor:ew-resize;user-select:none;}
+.cmp .pane{position:absolute;inset:0;padding:16px 18px;}
+.cmp .asis{background:color-mix(in srgb,var(--rose) 12%,var(--bg2));}
+.cmp .tobe{background:color-mix(in srgb,var(--green) 12%,var(--bg2));
+  clip-path:inset(0 0 0 var(--split,50%));}
+.cmp h4{font-family:"Syne",sans-serif;font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;
+  position:absolute;top:14px;}
+.cmp .asis h4{color:var(--rose);left:18px;} .cmp .tobe h4{color:var(--green);right:18px;}
+.cmp .dia{position:absolute;left:0;right:0;top:44px;padding:0 18px;}
+.cmp .dia svg{width:100%;height:auto;display:block;}
+.cmp .cap{position:absolute;bottom:12px;font-size:.68rem;color:var(--muted);}
+.cmp .asis .cap{left:18px;} .cmp .tobe .cap{right:18px;text-align:right;}
+.cmp .handle{position:absolute;top:0;bottom:0;left:var(--split,50%);width:2px;
+  background:var(--cyan);pointer-events:none;}
+.cmp .handle::after{content:"⇄";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:30px;height:30px;border-radius:50%;background:var(--cyan);color:var(--bg);
+  display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;}
+  .flow .fpath{stroke-dashoffset:0;} .flow .fbox,.flow text{opacity:1;}
+}
+</style>
+</head>
+<body>
+
+<header class="lab">
+  <div class="wrap">
+    <div>
+      <h1>UI <span>Lab</span></h1>
+      <div class="lab-sub">Prototypes only — nothing here touches index.html</div>
+    </div>
+    <button class="tbtn" id="themeBtn">Toggle theme</button>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <h2 class="sec">Part 1 — <span>Character</span> options</h2>
+  <p class="sec-note">Three hand-built SVG characters. No libraries, no image files — each is roughly
+    40–70 lines of inline SVG plus CSS keyframes. They react to your cursor, and you can trigger
+    the greeting manually with the buttons.</p>
+
+  <div class="grid g3">
+    <div class="card">
+      <h3>A · "Ori" the guide</h3>
+      <div class="meta">~0 KB · eyes follow cursor</div>
+      <div class="stage" id="oriStage">
+        <div class="bubble" id="oriBubble">Hi, I'm Sreya 👋</div>
+        <svg class="ori" id="ori" viewBox="0 0 130 150">
+          <g class="body-g">
+            <ellipse cx="65" cy="141" rx="26" ry="4" fill="var(--cyan)" opacity=".13"/>
+            <path d="M40 138 V104 a25 25 0 0 1 50 0 v34 z" fill="var(--cyan)" opacity=".16"/>
+            <path d="M40 138 V104 a25 25 0 0 1 50 0 v34 z" fill="none" stroke="var(--cyan)" stroke-width="1.8"/>
+            <line class="arm-wave" x1="96" y1="96" x2="104" y2="118" stroke="var(--cyan)" stroke-width="3.4" stroke-linecap="round"/>
+            <line x1="34" y1="96" x2="27" y2="118" stroke="var(--cyan)" stroke-width="3.4" stroke-linecap="round" opacity=".75"/>
+            <circle cx="65" cy="62" r="30" fill="var(--bg2)" stroke="var(--cyan)" stroke-width="2"/>
+            <circle cx="65" cy="62" r="30" fill="var(--cyan)" opacity=".1"/>
+            <g class="eye" id="oriEyes">
+              <circle cx="55" cy="60" r="4.2" fill="var(--cyan)"/>
+              <circle cx="75" cy="60" r="4.2" fill="var(--cyan)"/>
+            </g>
+            <g class="lid">
+              <rect x="49" y="54" width="12" height="12" fill="var(--bg2)"/>
+              <rect x="69" y="54" width="12" height="12" fill="var(--bg2)"/>
+            </g>
+            <path d="M57 74 q8 6 16 0" stroke="var(--cyan)" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <line x1="65" y1="32" x2="65" y2="22" stroke="var(--cyan)" stroke-width="1.8"/>
+            <circle cx="65" cy="19" r="4" fill="var(--cyan)"/>
+          </g>
+        </svg>
+      </div>
+      <div class="ctrls">
+        <button data-act="ori-wave">Wave hello</button>
+        <button data-act="ori-say">Say something</button>
+      </div>
+      <p class="desc">Friendliest of the three. Reads as a mascot — charming, but the furthest
+        from a buttoned-up analyst tone.</p>
+    </div>
+
+    <div class="card">
+      <h3>B · Node assistant</h3>
+      <div class="meta">~0 KB · most on-brand</div>
+      <div class="stage" id="nodeStage">
+        <div class="bubble" id="nodeBubble">Let's look at the data.</div>
+        <svg class="node-a" id="nodeA" viewBox="0 0 130 130">
+          <circle class="ring" cx="65" cy="65" r="30" fill="none" stroke="var(--cyan)" stroke-width="1.4"/>
+          <g class="orbit">
+            <circle cx="65" cy="27" r="4.4" fill="var(--purple)"/>
+            <circle cx="103" cy="65" r="3.4" fill="var(--amber)"/>
+            <circle cx="65" cy="103" r="3.4" fill="var(--green)"/>
+            <circle cx="27" cy="65" r="3.4" fill="var(--rose)"/>
+          </g>
+          <circle cx="65" cy="65" r="38" fill="none" stroke="var(--border)" stroke-width="1" stroke-dasharray="3 5"/>
+          <g class="core">
+            <circle cx="65" cy="65" r="21" fill="var(--bg2)" stroke="var(--cyan)" stroke-width="2"/>
+            <circle cx="65" cy="65" r="21" fill="var(--cyan)" opacity=".12"/>
+            <g id="nodeEyes">
+              <circle cx="58" cy="63" r="3.1" fill="var(--cyan)"/>
+              <circle cx="72" cy="63" r="3.1" fill="var(--cyan)"/>
+            </g>
+            <path d="M59 73 q6 4.5 12 0" stroke="var(--cyan)" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+          </g>
+        </svg>
+      </div>
+      <div class="ctrls">
+        <button data-act="node-nod">Nod</button>
+        <button data-act="node-say">Say something</button>
+      </div>
+      <p class="desc">Echoes the node/network motif already in your project banners. Alive and
+        personable without being a cartoon — my pick for a BA portfolio.</p>
+    </div>
+
+    <div class="card">
+      <h3>C · The walker</h3>
+      <div class="meta">~0 KB · walks + waves</div>
+      <div class="stage walk-stage" id="walkStage">
+        <div class="ground"></div>
+        <div class="bubble" id="walkBubble">Hello! 👋</div>
+        <svg class="walker" id="walker" viewBox="0 0 74 96">
+          <g class="torso">
+            <circle cx="37" cy="20" r="12" fill="var(--bg2)" stroke="var(--cyan)" stroke-width="2"/>
+            <circle cx="37" cy="20" r="12" fill="var(--cyan)" opacity=".12"/>
+            <circle cx="33" cy="19" r="2.2" fill="var(--cyan)"/>
+            <circle cx="41" cy="19" r="2.2" fill="var(--cyan)"/>
+            <line x1="37" y1="32" x2="37" y2="62" stroke="var(--cyan)" stroke-width="3" stroke-linecap="round"/>
+            <line class="arm-l" x1="37" y1="40" x2="25" y2="55" stroke="var(--cyan)" stroke-width="2.6" stroke-linecap="round"/>
+            <line class="arm-r" x1="37" y1="40" x2="49" y2="55" stroke="var(--cyan)" stroke-width="2.6" stroke-linecap="round"/>
+          </g>
+          <line class="leg-l" x1="37" y1="62" x2="28" y2="86" stroke="var(--cyan)" stroke-width="2.8" stroke-linecap="round"/>
+          <line class="leg-r" x1="37" y1="62" x2="46" y2="86" stroke="var(--cyan)" stroke-width="2.8" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="ctrls">
+        <button data-act="walk-go">Walk across</button>
+        <button data-act="walk-hi">Stop &amp; wave</button>
+      </div>
+      <p class="desc">Closest to "walking around". Most attention-grabbing, and the one most likely
+        to pull focus from your content — best used sparingly, e.g. once in the hero.</p>
+    </div>
+  </div>
+
+  <h2 class="sec">Part 2 — <span>Business analyst</span> features</h2>
+  <p class="sec-note">These demonstrate BA skills rather than listing them. All four are pure
+    SVG/CSS/JS — no charting library, no animation library.</p>
+
+  <div class="grid g2">
+    <div class="card">
+      <h3>1 · Interactive decision tree</h3>
+      <div class="meta">Hover a node to light its path</div>
+      <div class="stage" style="padding:18px;">
+        <svg class="dtree" id="dtree" viewBox="0 0 520 230">
+          <path class="lk" data-b="1" d="M96 115 C150 115 150 48 208 48"/>
+          <path class="lk" data-b="2" d="M96 115 C150 115 150 115 208 115"/>
+          <path class="lk" data-b="3" d="M96 115 C150 115 150 182 208 182"/>
+          <path class="lk" data-b="1" d="M300 48 C356 48 356 34 410 34"/>
+          <path class="lk" data-b="1" d="M300 48 C356 48 356 76 410 76"/>
+          <path class="lk" data-b="2" d="M300 115 C356 115 356 115 410 115"/>
+          <path class="lk" data-b="3" d="M300 182 C356 182 356 158 410 158"/>
+          <path class="lk" data-b="3" d="M300 182 C356 182 356 200 410 200"/>
+          <rect class="nd" x="16" y="98" width="80" height="34" rx="8"/>
+          <text x="56" y="119" text-anchor="middle">Service call</text>
+          <rect class="nd" data-b="1" x="208" y="31" width="92" height="34" rx="8"/>
+          <text x="254" y="52" text-anchor="middle">Billing?</text>
+          <rect class="nd" data-b="2" x="208" y="98" width="92" height="34" rx="8"/>
+          <text x="254" y="119" text-anchor="middle">Technical?</text>
+          <rect class="nd" data-b="3" x="208" y="165" width="92" height="34" rx="8"/>
+          <text x="254" y="186" text-anchor="middle">Upgrade?</text>
+          <rect class="nd" data-b="1" x="410" y="18" width="96" height="30" rx="8"/>
+          <text x="458" y="37" text-anchor="middle">Refund flow</text>
+          <rect class="nd" data-b="1" x="410" y="60" width="96" height="30" rx="8"/>
+          <text x="458" y="79" text-anchor="middle">Dispute flow</text>
+          <rect class="nd" data-b="2" x="410" y="100" width="96" height="30" rx="8"/>
+          <text x="458" y="119" text-anchor="middle">Truck roll</text>
+          <rect class="nd" data-b="3" x="410" y="142" width="96" height="30" rx="8"/>
+          <text x="458" y="161" text-anchor="middle">Offer tier</text>
+          <rect class="nd" data-b="3" x="410" y="184" width="96" height="30" rx="8"/>
+          <text x="458" y="203" text-anchor="middle">Retention</text>
+        </svg>
+      </div>
+      <p class="desc">Your actual Comcast work as the hero visual. Nothing else on a BA portfolio
+        says "I translate business rules into workflows" this directly.</p>
+    </div>
+
+    <div class="card">
+      <h3>2 · Live mini-dashboard</h3>
+      <div class="meta">Counters animate · filters really work</div>
+      <div class="stage" style="flex-direction:column;align-items:stretch;padding:18px;">
+        <div class="filters" id="dashFilters">
+          <button class="on" data-r="all">All time</button>
+          <button data-r="yr">Last year</button>
+          <button data-r="q">Last quarter</button>
+        </div>
+        <div class="kpis">
+          <div class="kpi"><div class="k">Records validated</div><div class="v" data-c="10000" data-suf="+">0</div></div>
+          <div class="kpi g"><div class="k">Reconciliation</div><div class="v" data-c="95" data-suf="%">0</div></div>
+          <div class="kpi a"><div class="k">Assets audited</div><div class="v" data-c="2000" data-suf="+">0</div></div>
+        </div>
+        <svg class="spark" id="spark" viewBox="0 0 300 78" preserveAspectRatio="none">
+          <defs><linearGradient id="sg" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="var(--cyan)" stop-opacity=".34"/>
+            <stop offset="100%" stop-color="var(--cyan)" stop-opacity="0"/>
+          </linearGradient></defs>
+          <path class="ar" fill="url(#sg)"/><path class="ln"/>
+        </svg>
+      </div>
+      <p class="desc">Proves BI fluency in about three seconds. The filters recompute the KPIs and
+        redraw the sparkline — it's a real (small) dashboard, not a picture of one.</p>
+    </div>
+
+    <div class="card">
+      <h3>3 · Self-drawing process flow</h3>
+      <div class="meta">Draws itself on scroll into view</div>
+      <div class="stage" style="padding:18px;">
+        <svg class="flow" id="flow" viewBox="0 0 560 120">
+          <path class="fpath" style="--len:470" d="M70 60 H150 M250 60 H330 M430 60 H470"/>
+          <rect class="fbox" x="10" y="40" width="112" height="40" rx="8"/>
+          <rect class="fbox" x="160" y="40" width="112" height="40" rx="8"/>
+          <rect class="fbox" x="310" y="40" width="112" height="40" rx="8"/>
+          <rect class="fbox" x="452" y="40" width="98" height="40" rx="8"/>
+          <text x="66" y="64" text-anchor="middle">Requirements</text>
+          <text x="216" y="64" text-anchor="middle">Decision tree</text>
+          <text x="366" y="64" text-anchor="middle">Validation</text>
+          <text x="501" y="64" text-anchor="middle">Rollout</text>
+        </svg>
+      </div>
+      <div class="ctrls"><button data-act="flow-replay">Replay</button></div>
+      <p class="desc">A BPMN-style flow that animates as the Experience section scrolls in.
+        Pure <code>stroke-dashoffset</code> — the cheapest impressive effect on this page.</p>
+    </div>
+
+    <div class="card">
+      <h3>4 · As-is / to-be slider</h3>
+      <div class="meta">Drag anywhere on the panel</div>
+      <div class="stage" style="padding:18px;">
+        <div class="cmp" id="cmp" style="--split:50%">
+          <div class="pane asis">
+            <h4>As-is</h4>
+            <div class="dia">
+              <svg viewBox="0 0 460 108">
+                <line x1="72" y1="34" x2="128" y2="34" stroke="var(--rose)" stroke-width="1.6"/>
+                <line x1="212" y1="34" x2="268" y2="34" stroke="var(--rose)" stroke-width="1.6"/>
+                <line x1="352" y1="34" x2="392" y2="34" stroke="var(--rose)" stroke-width="1.6"/>
+                <path d="M170 52 v22 h140 v-22" fill="none" stroke="var(--rose)" stroke-width="1.4" stroke-dasharray="4 4"/>
+                <text x="240" y="90" text-anchor="middle" font-size="9.5" fill="var(--rose)">rework loop</text>
+                <rect x="8" y="18" width="64" height="32" rx="7" fill="var(--bg2)" stroke="var(--rose)" stroke-width="1.5"/>
+                <text x="40" y="38" text-anchor="middle" font-size="9.5" fill="var(--text)">Teams</text>
+                <rect x="128" y="18" width="84" height="32" rx="7" fill="var(--bg2)" stroke="var(--rose)" stroke-width="1.5"/>
+                <text x="170" y="38" text-anchor="middle" font-size="9.5" fill="var(--text)">Copy by hand</text>
+                <rect x="268" y="18" width="84" height="32" rx="7" fill="var(--bg2)" stroke="var(--rose)" stroke-width="1.5"/>
+                <text x="310" y="38" text-anchor="middle" font-size="9.5" fill="var(--text)">Merge sheets</text>
+                <rect x="392" y="18" width="60" height="32" rx="7" fill="var(--bg2)" stroke="var(--rose)" stroke-width="1.5"/>
+                <text x="422" y="38" text-anchor="middle" font-size="9.5" fill="var(--text)">Report</text>
+              </svg>
+            </div>
+            <div class="cap">4 steps &middot; 2 manual &middot; rebuilt weekly</div>
+          </div>
+          <div class="pane tobe">
+            <h4>To-be</h4>
+            <div class="dia">
+              <svg viewBox="0 0 460 108">
+                <line x1="72" y1="34" x2="128" y2="34" stroke="var(--green)" stroke-width="1.6"/>
+                <line x1="212" y1="34" x2="268" y2="34" stroke="var(--green)" stroke-width="1.6"/>
+                <line x1="352" y1="34" x2="392" y2="34" stroke="var(--green)" stroke-width="1.6"/>
+                <text x="240" y="90" text-anchor="middle" font-size="9.5" fill="var(--green)">no manual step</text>
+                <rect x="8" y="18" width="64" height="32" rx="7" fill="var(--bg2)" stroke="var(--green)" stroke-width="1.5"/>
+                <text x="40" y="38" text-anchor="middle" font-size="9.5" fill="var(--text)">Teams</text>
+                <rect x="128" y="18" width="84" height="32" rx="7" fill="var(--bg2)" stroke="var(--green)" stroke-width="1.5"/>
+                <text x="170" y="38" text-anchor="middle" font-size="9.5" fill="var(--text)">Auto-parse</text>
+                <rect x="268" y="18" width="84" height="32" rx="7" fill="var(--bg2)" stroke="var(--green)" stroke-width="1.5"/>
+                <text x="310" y="38" text-anchor="middle" font-size="9.5" fill="var(--text)">SharePoint</text>
+                <rect x="392" y="18" width="60" height="32" rx="7" fill="var(--bg2)" stroke="var(--green)" stroke-width="1.5"/>
+                <text x="422" y="38" text-anchor="middle" font-size="9.5" fill="var(--text)">Report</text>
+              </svg>
+            </div>
+            <div class="cap">same 4 steps &middot; 0 manual &middot; always current</div>
+          </div>
+          <div class="handle"></div>
+        </div>
+      </div>
+      <p class="desc">Your Comcast automation as a before/after. Both diagrams sit on identical
+        coordinates, so dragging genuinely morphs one process into the other &mdash; the manual
+        steps and the rework loop disappear as you wipe right.</p>
+    </div>
+  </div>
+
+  <h2 class="sec">Notes on <span>cost &amp; risk</span></h2>
+  <div class="card">
+    <p style="font-size:.82rem;color:var(--muted);">
+      <span class="tag good">0 dependencies</span>
+      <span class="tag good">no build step</span>
+      <span class="tag good">both themes</span>
+      <span class="tag good">reduced-motion safe</span>
+      <span class="tag warn">character choice pending</span>
+    </p>
+    <p class="desc" style="margin-top:14px;">
+      Everything above is vanilla SVG + CSS + a little JS, matching how index.html already works.
+      Dropping any of these into the live site means appending one self-contained IIFE to script.js,
+      a block of CSS, and some markup — the same additive pattern your existing features use.
+      Each guards on element presence, so a missing node no-ops instead of throwing.
+    </p>
+  </div>
+</div>
+
+<script>
+/* Theme toggle — mirrors the live site's data-theme approach */
+(function(){
+  var b=document.getElementById('themeBtn'); if(!b) return;
+  b.addEventListener('click',function(){
+    var h=document.documentElement;
+    h.setAttribute('data-theme', h.getAttribute('data-theme')==='light'?'dark':'light');
+  });
+})();
+
+/* Cursor tracking for both face characters */
+(function(){
+  var pairs=[{eyes:document.getElementById('oriEyes'),svg:document.getElementById('ori'),r:3.4},
+             {eyes:document.getElementById('nodeEyes'),svg:document.getElementById('nodeA'),r:2.6}];
+  pairs=pairs.filter(function(p){return p.eyes&&p.svg;});
+  if(!pairs.length) return;
+  window.addEventListener('mousemove',function(e){
+    pairs.forEach(function(p){
+      var b=p.svg.getBoundingClientRect();
+      var dx=e.clientX-(b.left+b.width/2), dy=e.clientY-(b.top+b.height/2);
+      var d=Math.hypot(dx,dy)||1, m=Math.min(1,d/300);
+      p.eyes.style.transform='translate('+(dx/d*p.r*m).toFixed(2)+'px,'+(dy/d*p.r*m).toFixed(2)+'px)';
+    });
+  },{passive:true});
+})();
+
+/* Speech bubbles */
+function say(id,txt,ms){
+  var el=document.getElementById(id); if(!el) return;
+  if(txt) el.textContent=txt;
+  el.classList.add('show');
+  clearTimeout(el._t); el._t=setTimeout(function(){el.classList.remove('show');},ms||2600);
+}
+
+/* Walker */
+var walkState={x:0,dir:1,raf:null};
+function walkGo(){
+  var w=document.getElementById('walker'), st=document.getElementById('walkStage');
+  if(!w||!st) return;
+  cancelAnimationFrame(walkState.raf);
+  w.classList.add('moving'); w.classList.remove('hi');
+  var max=st.clientWidth-w.clientWidth-16;
+  function step(){
+    walkState.x+=1.5*walkState.dir;
+    if(walkState.x>=max){walkState.x=max;walkState.dir=-1;}
+    if(walkState.x<=0){walkState.x=0;walkState.dir=1;}
+    w.style.transform='translateX('+walkState.x+'px) scaleX('+walkState.dir+')';
+    walkState.raf=requestAnimationFrame(step);
+  }
+  step();
+}
+function walkHi(){
+  var w=document.getElementById('walker'); if(!w) return;
+  cancelAnimationFrame(walkState.raf);
+  w.classList.remove('moving'); w.classList.add('hi');
+  say('walkBubble','Hello! 👋',2400);
+  setTimeout(function(){w.classList.remove('hi');},1500);
+}
+
+/* Button routing */
+document.addEventListener('click',function(e){
+  var b=e.target.closest('[data-act]'); if(!b) return;
+  var a=b.getAttribute('data-act');
+  if(a==='ori-wave'){var o=document.getElementById('ori');o.classList.remove('waving');
+    void o.offsetWidth;o.classList.add('waving');say('oriBubble','Hi, I\'m Sreya 👋');}
+  if(a==='ori-say'){say('oriBubble','I turn messy processes into clear ones.',3200);}
+  if(a==='node-nod'){var n=document.getElementById('nodeA');n.classList.remove('nodding');
+    void n.offsetWidth;n.classList.add('nodding');
+    setTimeout(function(){n.classList.remove('nodding');},900);}
+  if(a==='node-say'){say('nodeBubble','Let\'s look at the data.',3000);}
+  if(a==='walk-go') walkGo();
+  if(a==='walk-hi') walkHi();
+  if(a==='flow-replay'){var f=document.getElementById('flow');
+    f.classList.remove('run');void f.offsetWidth;f.classList.add('run');}
+});
+
+/* Decision tree hover */
+(function(){
+  var t=document.getElementById('dtree'); if(!t) return;
+  t.addEventListener('mouseover',function(e){
+    var n=e.target.closest('[data-b]'); if(!n) return;
+    var br=n.getAttribute('data-b');
+    t.querySelectorAll('[data-b]').forEach(function(el){
+      el.classList.toggle('lit', el.getAttribute('data-b')===br);
+    });
+  });
+  t.addEventListener('mouseleave',function(){
+    t.querySelectorAll('[data-b]').forEach(function(el){el.classList.remove('lit');});
+  });
+})();
+
+/* Dashboard: counters + sparkline */
+(function(){
+  var wrapEl=document.getElementById('dashFilters'), spark=document.getElementById('spark');
+  if(!wrapEl||!spark) return;
+  var DATA={all:[8,22,17,34,29,46,41,58,54,70,66,82],
+            yr:[30,26,44,38,56,50,66,60,74,70,84,90],
+            q:[52,60,55,70,64,78,72,86,80,92,88,96]};
+  var SCALE={all:1,yr:.72,q:.34};
+  var ln=spark.querySelector('.ln'), ar=spark.querySelector('.ar');
+  function drawSpark(k){
+    var d=DATA[k],pts=d.map(function(v,i){
+      return [(i/(d.length-1))*300, 74-(v/100)*68];
+    });
+    var p='M'+pts.map(function(q){return q[0].toFixed(1)+' '+q[1].toFixed(1);}).join(' L');
+    ln.setAttribute('d',p);
+    ar.setAttribute('d',p+' L300 78 L0 78 Z');
+  }
+  function count(el,to,suf){
+    var from=0,t0=performance.now(),dur=900;
+    function tick(now){
+      var p=Math.min(1,(now-t0)/dur), e=1-Math.pow(1-p,3);
+      var v=Math.round(from+(to-from)*e);
+      el.textContent=(v>=1000?v.toLocaleString():v)+suf;
+      if(p<1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  function refresh(k){
+    document.querySelectorAll('.kpi .v').forEach(function(el){
+      var base=+el.getAttribute('data-c'), suf=el.getAttribute('data-suf')||'';
+      var v=Math.round(base*SCALE[k]);
+      if(suf==='%') v=Math.min(99,Math.round(base*(k==='all'?1:k==='yr'?.98:.94)));
+      count(el,v,suf);
+    });
+    drawSpark(k);
+  }
+  wrapEl.addEventListener('click',function(e){
+    var b=e.target.closest('button'); if(!b) return;
+    wrapEl.querySelectorAll('button').forEach(function(x){x.classList.remove('on');});
+    b.classList.add('on'); refresh(b.getAttribute('data-r'));
+  });
+  new IntersectionObserver(function(en,o){
+    if(en[0].isIntersecting){refresh('all');o.disconnect();}
+  },{threshold:.4}).observe(spark);
+})();
+
+/* Flow: draw when scrolled into view */
+(function(){
+  var f=document.getElementById('flow'); if(!f) return;
+  new IntersectionObserver(function(en,o){
+    if(en[0].isIntersecting){f.classList.add('run');o.disconnect();}
+  },{threshold:.45}).observe(f);
+})();
+
+/* As-is / to-be drag */
+(function(){
+  var c=document.getElementById('cmp'); if(!c) return;
+  var down=false;
+  function set(e){
+    var b=c.getBoundingClientRect();
+    var x=((e.touches?e.touches[0].clientX:e.clientX)-b.left)/b.width*100;
+    c.style.setProperty('--split',Math.max(0,Math.min(100,x))+'%');
+  }
+  c.addEventListener('mousedown',function(e){down=true;set(e);});
+  window.addEventListener('mousemove',function(e){if(down)set(e);});
+  window.addEventListener('mouseup',function(){down=false;});
+  c.addEventListener('touchstart',function(e){down=true;set(e);},{passive:true});
+  c.addEventListener('touchmove',function(e){if(down)set(e);},{passive:true});
+  c.addEventListener('touchend',function(){down=false;});
+})();
+</script>
+</body>
+</html>
